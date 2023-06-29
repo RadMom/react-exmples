@@ -10,6 +10,13 @@ html {
 body {
     margin: 0;
 }
-main{
+main {
     margin-top: 40px;
+   
+}
+.products-layout {
+    display: flex;
+    flex-direction: row;
+    height: 70vh;
+    margin: 10px;
 }

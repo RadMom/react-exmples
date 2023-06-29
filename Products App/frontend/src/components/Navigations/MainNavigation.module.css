@@ -1,3 +1,7 @@
+.mainNavigation{
+    margin: 5px;
+    border: 1px solid red;
+}
 .nav ul {
     display: flex;
     flex-direction: row;

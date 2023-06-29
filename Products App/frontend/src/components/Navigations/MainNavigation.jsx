@@ -4,7 +4,7 @@ import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
     return (
-        <div>
+        <div className={classes.mainNavigation}>
             <h1>Products App</h1>
             <nav className={classes.nav}>
                 <ul>
