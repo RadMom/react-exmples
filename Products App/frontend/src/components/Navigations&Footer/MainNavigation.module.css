@@ -1,4 +1,4 @@
-.mainNavigation{
+.header {
     margin: 5px;
     border: 1px solid red;
 }
@@ -7,9 +7,8 @@
     flex-direction: row;
     margin: 10px;
     text-decoration: none;
-    
 }
-li{
+li {
     list-style: none;
 }
 li a {

@@ -6,6 +6,7 @@ const ProductsList = ({ products }) => {
     return (
         <div className={classes.products}>
             <h1>All Events</h1>
+
             <ul className={classes.list}>
                 {products.map((product) => (
                     <li

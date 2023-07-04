@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-import ProductsNavigation from "../components/Navigations/ProductsNavigation";
+import ProductsNavigation from "../components/Navigations&Footer/ProductsNavigation";
+import classes from"./ProductsLayout.module.css"
 
 const ProductsLayout = () => {
     return (
-        <div className="products-layout">
+        <div className={classes.products}>
             <ProductsNavigation />
             <Outlet />
         </div>

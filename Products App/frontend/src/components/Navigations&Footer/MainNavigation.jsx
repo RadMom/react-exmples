@@ -4,7 +4,7 @@ import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
     return (
-        <div className={classes.mainNavigation}>
+        <header className={classes.header}>
             <h1>Products App</h1>
             <nav className={classes.nav}>
                 <ul>
@@ -19,7 +19,7 @@ const MainNavigation = () => {
                     </li>
                 </ul>
             </nav>
-        </div>
+        </header>
     );
 };
 

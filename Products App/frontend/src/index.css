@@ -1,22 +1,10 @@
-* {
-    box-sizing: border-box;
-}
-
 html {
-    font-family: sans-serif;
-    background: #fff;
+    background: #eede52;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 
 body {
     margin: 0;
-}
-main {
-    margin-top: 40px;
-   
-}
-.products-layout {
-    display: flex;
-    flex-direction: row;
-    height: 70vh;
-    margin: 10px;
 }
