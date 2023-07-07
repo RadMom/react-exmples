@@ -4,39 +4,51 @@ const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
 
 //user Schema
-const userSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
+const userSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        isAdmin: {
+            type: Boolean,
+            default: false,
+        },
     },
-    password: {
-        type: String,
-        required: true,
-    },
-});
+    { timestamps: true }
+);
 
 //static signup method. We use signup function in userControllers.
 // It can be whatever we want- userSchema.statics.pepito but we must use the same name in userController.js
-userSchema.statics.signup = async function (email, password) {
-    if (!email || !password) {
-        throw Error("Please provide email and password");
+userSchema.statics.signup = async function (name, email, password) {
+    if (!name || !email || !password) {
+        throw Error("Please provide name, email and password");
     }
 
     //Check if user already exists
     const userExist = await this.findOne({ email });
     if (userExist) {
-        throw Error("User already exists");
+        throw Error("Email already exists");
     }
 
+    //Hash the password and create user
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await this.create({ email, password: hashedPassword });
+    const user = await this.create({ name, email, password: hashedPassword });
 
     return user;
 };
 
-//static login method. We use login function in usrController.
+//static login method. We use login function in userController.
 userSchema.statics.login = async function (email, password) {
     if (!email || !password) {
         throw Error("Please provide email and password");
