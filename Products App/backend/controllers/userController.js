@@ -37,7 +37,25 @@ const registerUser = async (req, res) => {
     }
 };
 
-//getUser controller
-const getUser = async (req, res) => {};
+//updateUserProfile controller
+const updateUserProfile = async (req, res) => {};
 
-module.exports = { loginUser, registerUser, getUser }
+//getUserOrders controller
+const getUserOrders = async (req, res) => {};
+
+//getAllUsers controller
+const getAllUsers = async (req, res) => {
+    const users = await User.find({});
+};
+
+//deleteUser controller
+const deleteUser = async (req, res) => {};
+
+module.exports = {
+    loginUser,
+    registerUser,
+    updateUserProfile,
+    getUserOrders,
+    getAllUsers,
+    deleteUser,
+};

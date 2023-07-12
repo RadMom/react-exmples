@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+import ProductDetails from "./ProductDetails";
 import classes from "./ProductsList.module.css";
 
 const ProductsList = ({ products }) => {
@@ -9,20 +11,13 @@ const ProductsList = ({ products }) => {
 
             <ul className={classes.list}>
                 {products.map((product) => (
-                    <li
+                    <ProductDetails
                         key={product.id}
-                        className={classes.item}
-                    >
-                        <Link to={`/products/${product.id}`}>
-                            <img
-                                src={product.image}
-                                alt={product.title}
-                            />
-                            <div className={classes.content}>
-                                <h2>{product.title}</h2>
-                            </div>
-                        </Link>
-                    </li>
+                        image={product.image}
+                        title={product.title}
+                        details={product.details}
+                        price={product.price}
+                    ></ProductDetails>
                 ))}
             </ul>
         </div>
