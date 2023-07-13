@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Order = require("../models/Order");
 const jwt = require("jsonwebtoken");
 
 // JWT then uses the sign() method to create a JSON Web Token for that user
@@ -38,18 +39,48 @@ const registerUser = async (req, res) => {
 };
 
 //updateUserProfile controller
-const updateUserProfile = async (req, res) => {};
+const updateUserProfile = async (req, res) => {
+    const user=await User.findById(req.params.id)
+
+    if(user){
+        user.name=req.body.name || user.name
+        user.email=req.body.email || user.email
+        if(req.body.password){
+            user.password=req.body.password
+        }
+    }else{
+        res.status(404)
+        throw new Error("User not found !")
+    }
+};
 
 //getUserOrders controller
-const getUserOrders = async (req, res) => {};
+const getUserOrders = async (req, res) => {
+    const orders = await Order.find({ user: req.params.id });
+    if (orders) {
+        res.json(orders);
+    } else {
+        res.status(404);
+        throw new Error("No Orders found for this User");
+    }
+};
 
 //getAllUsers controller
 const getAllUsers = async (req, res) => {
     const users = await User.find({});
+    res.json({ users });
 };
 
 //deleteUser controller
-const deleteUser = async (req, res) => {};
+const deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        res.json(user);
+    } catch (error) {
+        res.status(404);
+        throw new Error("This user could not be found.");
+    }
+};
 
 module.exports = {
     loginUser,
