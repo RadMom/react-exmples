@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema(
     {
@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-      
+
         category: {
             type: String,
             required: true,
