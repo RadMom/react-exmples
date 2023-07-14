@@ -13,11 +13,11 @@ const {
 const { protectRoute, admin } = require("../middleware/authMiddleware");
 
 //routes
-productRoutes.route("/products").get(getAllProducts);
-productRoutes.route("/products/:productId").get(getProduct);
+productRoutes.route("/").get(getAllProducts);
+productRoutes.route("/:id").get(getProduct);
 //protectedRoutes,admin only
-productRoutes.route("/products").post(protectRoute, admin, createProduct);
-productRoutes.route("/products/:productId").delete(protectRoute, admin, deleteProduct);
-productRoutes.route("/products/:productId").put(protectRoute, admin, updateProduct);
+productRoutes.route("/").post(protectRoute, admin, createProduct);
+productRoutes.route("/:id").delete(protectRoute, admin, deleteProduct);
+productRoutes.route("/:id").put(protectRoute, admin, updateProduct);
 
 module.exports = productRoutes;

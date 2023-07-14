@@ -32,6 +32,7 @@ const createProduct = async (req, res) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
 
     const newProduct = await Product.create({
+        user:req.user._id,
         name,
         image,
         category,
@@ -55,7 +56,9 @@ const createProduct = async (req, res) => {
 //DELETE PRODUCT ,method:DELETE
 //URL: /products/:productId
 const deleteProduct = async (req, res) => {
+    console.log(req.params.id);
     const product = await Product.findByIdAndDelete(req.params.id);
+    console.log(product);
     if (product) {
         res.json(product);
     } else {
@@ -66,8 +69,8 @@ const deleteProduct = async (req, res) => {
 //UPDATE PRODUCT ,method:PUT
 //URL: /products/:productId
 const updateProduct = async (req, res) => {
-    const { name, image, category, description, price, stock, productIsNew } = req.body;
-    const product = await Product.findById(id);
+    const { name, image, category, description, price, stock, productIsNew, } = req.body;
+    const product = await Product.findById(req.params.id);
 
     if (product) {
         product.name = name;
