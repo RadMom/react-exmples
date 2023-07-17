@@ -17,6 +17,12 @@ const MainNavigation = () => {
                     <li>
                         <NavLink to="/about">About Page</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/registration">Registration</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/login">Login</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

@@ -12,15 +12,19 @@ import ProductsPage from "./pages/ProductsPage";
 import AboutPage from "./pages/AboutPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ErrorPage from "./pages/ErrorPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
     const router = createBrowserRouter([
         {
             path: "/",
             element: <RootLayout />,
-            errorElement:<ErrorPage/>,
+            errorElement: <ErrorPage />,
             children: [
                 { index: true, element: <HomePage /> },
+                { path: "registration", element: <RegistrationPage /> },
+                { path: "login", element: <LoginPage /> },
                 {
                     path: "products",
                     element: <ProductsLayout />,
