@@ -1,10 +1,29 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
+import axios from "axios"
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const formSubmitHandler = () => {};
+    const formSubmitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:5000/user/login", { email, password });
+
+            if (response.statusText) {
+                dispatch(login(response.data.token))
+                console.log(response)
+                console.log("Login!!!")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        console.log("finished")
+    };
     return (
         <div>
             <form onSubmit={formSubmitHandler}>
