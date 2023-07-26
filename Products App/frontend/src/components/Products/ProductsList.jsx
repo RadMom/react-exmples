@@ -7,7 +7,7 @@ const ProductsList = ({ products }) => {
     console.log(products);
     return (
         <div className={classes.products}>
-            <h1>All Events</h1>
+            <h1>All Products</h1>
 
             <ul className={classes.list}>
                 {products.map((product) => (

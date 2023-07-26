@@ -19,20 +19,32 @@ const loginUser = async (req, res) => {
         //create JWT token
         const token = createToken(user._id);
 
-        res.json({ email, token });
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            idAdmin: user.isAdmin,
+            token,
+        });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
 
-//signup controller
+//register controller
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
         const user = await User.signup(name, email, password);
         const token = createToken(user._id);
-        res.json({ email, token });
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            idAdmin: user.isAdmin,
+            token,
+        });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -40,17 +52,17 @@ const registerUser = async (req, res) => {
 
 //updateUserProfile controller
 const updateUserProfile = async (req, res) => {
-    const user=await User.findById(req.params.id)
+    const user = await User.findById(req.params.id);
 
-    if(user){
-        user.name=req.body.name || user.name
-        user.email=req.body.email || user.email
-        if(req.body.password){
-            user.password=req.body.password
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if (req.body.password) {
+            user.password = req.body.password;
         }
-    }else{
-        res.status(404)
-        throw new Error("User not found !")
+    } else {
+        res.status(404);
+        throw new Error("User not found !");
     }
 };
 

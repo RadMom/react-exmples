@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../redux/authSlice";
-import axios from "axios"
+import axios from "axios";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,17 +14,21 @@ const LoginPage = () => {
     const formSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/user/login", { email, password });
+            const response = await axios.post("http://localhost:5000/user/login", {
+                email,
+                password,
+            });
 
-            if (response.statusText) {
-                dispatch(login(response.data.token))
-                console.log(response)
-                console.log("Login!!!")
+            if (response.statusText === "OK") {
+                console.log(response);
+                dispatch(login(response.data));
+                
+                console.log("Login!!!");
+                navigate("/");
             }
         } catch (error) {
             console.log(error);
         }
-        console.log("finished")
     };
     return (
         <div>

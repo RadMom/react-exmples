@@ -1,6 +1,10 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
+
+import { logout } from "./redux/authSlice";
 
 //layouts
 import RootLayout from "./layouts/RootLayout";
@@ -14,8 +18,22 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ErrorPage from "./pages/ErrorPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
+import CreateProduct from "./pages/admin/CreateProduct";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const expirationTime = localStorage.getItem("expirationTime");
+        if (expirationTime) {
+            const currentTime = new Date().getTime();
+            console.log(currentTime);
+            if (currentTime > expirationTime) {
+                dispatch(logout());
+            }
+        }
+    }, [dispatch]);
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -34,6 +52,8 @@ function App() {
                     ],
                 },
                 { path: "about", element: <AboutPage /> },
+                //admin routes
+                { path: "/admin/products/create", element: <CreateProduct /> },
             ],
         },
     ]);

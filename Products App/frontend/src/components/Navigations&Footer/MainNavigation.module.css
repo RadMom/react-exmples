@@ -1,6 +1,11 @@
 .header {
     margin: 5px;
     border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+}
+.info{
+    display: flex;
 }
 .nav ul {
     display: flex;
@@ -16,4 +21,7 @@ li a {
     margin: 15px;
     padding: 5px;
     border: 1px solid black;
+}
+.userInfo{
+    
 }
