@@ -7,7 +7,7 @@ import { logout } from "../../redux/authSlice";
 import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
-    const {userInfo} = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state) => state.auth);
     console.log(userInfo);
 
     const navigate = useNavigate();
@@ -32,16 +32,21 @@ const MainNavigation = () => {
                         <li>
                             <NavLink to="/about">About Page</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/registration">Registration</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/login">Login</NavLink>
-                        </li>
+                        {!userInfo && (
+                            <>
+                                <li>
+                                    <NavLink to="/registration">Registration</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/login">Login</NavLink>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </nav>
                 {userInfo !== null && (
                     <div className={classes.userInfo}>
+                        <p>{userInfo.email}</p>
                         <button onClick={logoutHandler}>Logout</button>
                     </div>
                 )}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const CreateProduct = () => {
     const [productName, setProductName] = useState();
@@ -11,17 +12,23 @@ const CreateProduct = () => {
     const createProductHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/products", {
-                user: req.user._id,
-                name: productName,
-                image: productImage,
-                category: productCategory,
-                description: productDescription,
-                price: productPrice,
-                stock: productStock,
-            });
+            const token = JSON.parse(localStorage.getItem("userInfo")).token;
+            console.log(token);
+            const response = await axios.post(
+                "http://localhost:5000/products",
+                {
+                    // user: req.user._id,
+                    name: productName,
+                    image: productImage,
+                    category: productCategory,
+                    description: productDescription,
+                    price: productPrice,
+                    stock: productStock,
+                },
+                { headers: { authorization: `Bearer ${token}` } }
+            );
 
-            if (response.statusText === "OK") {
+            if (response.statusText !== "OK") {
                 console.log(response);
                 dispatch(login(response.data));
 
@@ -32,7 +39,7 @@ const CreateProduct = () => {
             console.log(error);
         }
     };
-   
+
     return (
         <div>
             <form onSubmit={createProductHandler}>
