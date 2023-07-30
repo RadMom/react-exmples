@@ -6,6 +6,8 @@
 }
 .info{
     display: flex;
+    width: auto;
+    justify-content: space-between;
 }
 .nav ul {
     display: flex;
@@ -18,10 +20,13 @@ li {
 }
 li a {
     text-decoration: none;
-    margin: 15px;
+    margin-left: 15px;
     padding: 5px;
     border: 1px solid black;
 }
 .userInfo{
-    
+    display: flex;
+    align-content: end;
+    margin: 10px;
+    padding: 12px;
 }

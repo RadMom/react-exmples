@@ -1,14 +1,12 @@
 .products {
     margin: 10px;
-    max-width: 40rem;
 }
 
 .list {
     display: flex;
-    flex-wrap: wrap;
-    width: auto;
-    height: auto;
-    
+   flex-wrap: wrap;
+   justify-content: space-around;
+  
     
 }
 .item {
@@ -41,3 +39,4 @@
 .item h2 {
     margin: 0 0 1rem 0;
 }
+

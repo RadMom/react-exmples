@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../../redux/authSlice";
@@ -48,6 +48,7 @@ const MainNavigation = () => {
                     <div className={classes.userInfo}>
                         <p>{userInfo.email}</p>
                         <button onClick={logoutHandler}>Logout</button>
+                        <Link to="/cart"> Cart</Link>
                     </div>
                 )}
             </div>

@@ -4,10 +4,12 @@ const initialState = {
     products: [],
 };
 
-const productsSlice=({
-    name:"products",
+const productsSlice = createSlice({
+    name: "products",
     initialState,
-    reducers:{
-        setProducts
-    }
-})
+    reducers: {
+        setProducts(state, action) {},
+    },
+});
+
+export default productsSlice.reducer;
