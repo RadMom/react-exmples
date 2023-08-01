@@ -1,42 +1,15 @@
 .products {
-    margin: 10px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .list {
     display: flex;
    flex-wrap: wrap;
    justify-content: space-around;
-  
+   padding: 0px;
     
 }
-.item {
-    width: 50%;
-    height: 50%;
-}
 
-.item a {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    background-color:white;
-    border-radius: 4px;
-    overflow: hidden;
-}
 
-.item a:hover {
-    transform: scale(1.02);
-    background-color:wheat
-}
-
-.item img {
-    width: 33%;
-    object-fit: cover;
-}
-
-.content {
-    padding: 1rem;
-}
-.item h2 {
-    margin: 0 0 1rem 0;
-}
 

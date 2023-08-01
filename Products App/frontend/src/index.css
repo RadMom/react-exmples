@@ -1,5 +1,5 @@
 html {
-    background:white;
+    background:rgb(250, 252, 250);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -7,8 +7,13 @@ html {
 
 body {
     margin: 0;
+    padding: 0px;
 }
 form{
     display: flex;
     flex-direction: column;
+}
+main{
+    margin: 0px;
+    padding: 0px;
 }

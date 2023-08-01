@@ -1,6 +1,10 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+//icons
+import { BsCart2 } from "react-icons/bs";
+import { BiUserCircle } from "react-icons/bi";
 
 import { logout } from "../../redux/authSlice";
 
@@ -8,6 +12,7 @@ import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
     const { userInfo } = useSelector((state) => state.auth);
+    const cart = useSelector((state) => state.cart);
     console.log(userInfo);
 
     const navigate = useNavigate();
@@ -24,21 +29,57 @@ const MainNavigation = () => {
                 <nav className={classes.nav}>
                     <ul>
                         <li>
-                            <NavLink to="/">Home Page</NavLink>
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) =>
+                                    isActive ? classes.active : undefined
+                                }
+                                end
+                            >
+                                Home Page
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/products">Products Page</NavLink>
+                            <NavLink
+                                to="/products"
+                                className={({ isActive }) =>
+                                    isActive ? classes.active : undefined
+                                }
+                            >
+                                Products Page
+                            </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/about">About Page</NavLink>
+                            <NavLink
+                                to="/about"
+                                className={({ isActive }) =>
+                                    isActive ? classes.active : undefined
+                                }
+                            >
+                                About Page
+                            </NavLink>
                         </li>
                         {!userInfo && (
                             <>
                                 <li>
-                                    <NavLink to="/registration">Registration</NavLink>
+                                    <NavLink
+                                        to="/registration"
+                                        className={({ isActive }) =>
+                                            isActive ? classes.active : undefined
+                                        }
+                                    >
+                                        Registration
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/login">Login</NavLink>
+                                    <NavLink
+                                        to="/login"
+                                        className={({ isActive }) =>
+                                            isActive ? classes.active : undefined
+                                        }
+                                    >
+                                        Login
+                                    </NavLink>
                                 </li>
                             </>
                         )}
@@ -46,9 +87,24 @@ const MainNavigation = () => {
                 </nav>
                 {userInfo !== null && (
                     <div className={classes.userInfo}>
-                        <p>{userInfo.email}</p>
+                        <NavLink
+                            to="/admin/products/create"
+                            className={({ isActive }) => (isActive ? classes.active : undefined)}
+                        >
+                            Create
+                        </NavLink>
+                        <BiUserCircle /> <p> {userInfo.email}</p>
                         <button onClick={logoutHandler}>Logout</button>
-                        <Link to="/cart"> Cart</Link>
+                        <NavLink
+                            to="/cart"
+                            className={classes.cart}
+                        >
+                            <span className={classes.icon}>
+                                <BsCart2 />
+                            </span>
+                            <span>Your Cart</span>
+                            <span className={classes.badges}>{cart.totalQuantity}</span>
+                        </NavLink>
                     </div>
                 )}
             </div>

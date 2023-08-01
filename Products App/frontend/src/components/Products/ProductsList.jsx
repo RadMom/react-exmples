@@ -9,8 +9,7 @@ const ProductsList = (props) => {
     console.log(props);
     return (
         <div className={classes.products}>
-            <h1>All Products</h1>
-
+            
             <ul className={classes.list}>
                 {products ? (
                     products.map((product) => (

@@ -34,6 +34,7 @@ function App() {
                 dispatch(logout());
             }
         }
+        
     }, [dispatch]);
 
     const router = createBrowserRouter([

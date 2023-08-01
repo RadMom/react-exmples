@@ -8,16 +8,11 @@ const ProductsPage = () => {
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
   
-    const token = JSON.parse(localStorage.getItem("userInfo")).token;
-
-    console.log(token);
 
     useEffect(() => {
         const fetchingProducts = async () => {
             try {
-                const data = await axios.get("http://localhost:5000/products", {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const data = await axios.get("http://localhost:5000/products");
                 setProducts(oldState=>data.data);
                 console.log(products);
             } catch (error) {
