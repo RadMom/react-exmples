@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+
+import { createProduct } from "../../redux/actions/adminActions";
 
 const CreateProduct = () => {
     const [productName, setProductName] = useState();
@@ -9,35 +12,20 @@ const CreateProduct = () => {
     const [productPrice, setProductPrice] = useState();
     const [productStock, setProductStock] = useState();
 
+    const dispatch = useDispatch();
+
     const createProductHandler = async (e) => {
         e.preventDefault();
-        try {
-            const token = JSON.parse(localStorage.getItem("userInfo")).token;
-            console.log(token);
-            const response = await axios.post(
-                "http://localhost:5000/products",
-                {
-                    // user: req.user._id,
-                    name: productName,
-                    image: productImage,
-                    category: productCategory,
-                    description: productDescription,
-                    price: productPrice,
-                    stock: productStock,
-                },
-                { headers: { authorization: `Bearer ${token}` } }
-            );
-
-            if (response.statusText !== "OK") {
-                console.log(response);
-                dispatch(login(response.data));
-
-                console.log("Login!!!");
-                navigate("/");
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(
+            createProduct(
+                productName,
+                productImage,
+                productCategory,
+                productDescription,
+                productPrice,
+                productStock
+            )
+        );
     };
 
     return (

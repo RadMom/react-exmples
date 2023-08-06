@@ -13,7 +13,6 @@ import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
     const { userInfo } = useSelector((state) => state.auth);
     const cart = useSelector((state) => state.cart);
-    console.log(userInfo);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -88,7 +87,7 @@ const MainNavigation = () => {
                 {userInfo !== null && (
                     <div className={classes.userInfo}>
                         <NavLink
-                            to="/admin/products/create"
+                            to="admin/products/create"
                             className={({ isActive }) => (isActive ? classes.active : undefined)}
                         >
                             Create
@@ -102,7 +101,8 @@ const MainNavigation = () => {
                             <span className={classes.icon}>
                                 <BsCart2 />
                             </span>
-                            <span>Your Cart</span>
+                            <span>Items: </span>
+                           
                             <span className={classes.badges}>{cart.totalQuantity}</span>
                         </NavLink>
                     </div>

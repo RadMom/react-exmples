@@ -55,10 +55,7 @@ const cartSlice = createSlice({
                 state.totalPrice -= existingItem.price;
             }
         },
-        filterProdyctsByCategory(state,{payload}){
-            const category=action.payload;
-            const filteredProducts=state.products.filter(product=>product.category===payload)
-        }
+        
     },
 });
 

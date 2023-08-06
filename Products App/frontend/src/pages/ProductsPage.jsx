@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../redux/actions/productsActions";
 
 import ProductsList from "../components/Products/ProductsList";
 
 const ProductsPage = () => {
-    const [products, setProducts] = useState([]);
+    const productsList = useSelector((state) => state.products);
+    const { products } = productsList;
     const dispatch = useDispatch();
-  
+    console.log(productsList);
 
+    //MUST CHECK localeStorage ???
+    
+    const test = JSON.parse(localStorage.getItem("products"));
+    console.log(test);
     useEffect(() => {
-        const fetchingProducts = async () => {
-            try {
-                const data = await axios.get("http://localhost:5000/products");
-                setProducts(oldState=>data.data);
-                console.log(products);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchingProducts();
-    }, []);
-    console.log(products);
-    return <ProductsList products={products} />;
+        dispatch(getProducts());
+    }, [dispatch]);
+
+    return <ProductsList products={test} />;
 };
 
 export default ProductsPage;

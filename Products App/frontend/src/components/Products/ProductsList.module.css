@@ -5,11 +5,12 @@
 
 .list {
     display: flex;
-   flex-wrap: wrap;
-   justify-content: space-around;
-   padding: 0px;
-    
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0px;
 }
 
-
-
+.list a {
+    text-decoration: none;
+    color: black;
+}

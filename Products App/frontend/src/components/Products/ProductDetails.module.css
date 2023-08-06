@@ -32,7 +32,8 @@
     width: 200px;
     object-fit: cover;
 }
-.limit{
-    overflow-x: scroll;
+.limit {
+    overflow-x: hidden;
     white-space: nowrap;
 }
+
