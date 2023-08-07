@@ -17,9 +17,6 @@ const ProductDetails = (props) => {
         dispatch(cartAcrions.addItemToCart(props));
     };
 
-    const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id));
-    };
     return (
         <Card>
             <header className={classes.header}>
@@ -33,7 +30,6 @@ const ProductDetails = (props) => {
             <div className={classes.price}>${price}</div>
             <div className={classes.actions}>
                 <button onClick={addToCartHandler}>Add to Cart</button>
-                <button onClick={() => deleteProductHandler(id)}>Delete Product</button>
             </div>
         </Card>
     );

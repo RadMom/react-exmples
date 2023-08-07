@@ -18,9 +18,13 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ErrorPage from "./pages/ErrorPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
-import CreateProduct from "./pages/admin/CreateProduct";
 import Cart from "./components/Cart/Cart";
+//admin
 import AdminDushboard from "./pages/admin/AdminDushboard";
+import ProductsAdmin from "./components/adminComponents/ProductsAdmin";
+import UsersAdmin from "./components/adminComponents/UsersAdmin";
+import OrdersAdmin from "./components/adminComponents/OrdersAdmin";
+import CreateProduct from "./pages/admin/ProductForm";
 
 function App() {
     const dispatch = useDispatch();
@@ -58,9 +62,11 @@ function App() {
                 //admin routes
                 {
                     path: "admin",
-
+                    element: <AdminDushboard />,
                     children: [
-                        { index: true, element: <AdminDushboard /> },
+                        { path: "products", element: <ProductsAdmin /> },
+                        { path: "users", element: <UsersAdmin /> },
+                        { path: "orders", element: <OrdersAdmin /> },
                         { path: "create", element: <CreateProduct /> },
                     ],
                 },

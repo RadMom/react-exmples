@@ -86,12 +86,6 @@ const MainNavigation = () => {
                 </nav>
                 {userInfo !== null && (
                     <div className={classes.userInfo}>
-                        <NavLink
-                            to="admin/products/create"
-                            className={({ isActive }) => (isActive ? classes.active : undefined)}
-                        >
-                            Create
-                        </NavLink>
                         <BiUserCircle /> <p> {userInfo.email}</p>
                         <button onClick={logoutHandler}>Logout</button>
                         <NavLink
@@ -102,7 +96,7 @@ const MainNavigation = () => {
                                 <BsCart2 />
                             </span>
                             <span>Items: </span>
-                           
+
                             <span className={classes.badges}>{cart.totalQuantity}</span>
                         </NavLink>
                     </div>

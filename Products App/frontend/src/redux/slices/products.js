@@ -16,7 +16,6 @@ const productsSlice = createSlice({
         },
         setProducts(state, action) {
             state.products = action.payload;
-            console.log(action.payload);
             state.loading = false;
             state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(action.payload)));
@@ -28,6 +27,12 @@ const productsSlice = createSlice({
         setError(state, action) {
             state.error = action.payload;
             state.loading = false;
+        },
+        setDeleteProduct(state, action) {
+            const id = action.payload;
+            state.products = state.products.filter((product) => product._id !== id);
+            console.log(state.products);
+            JSON.stringify(localStorage.setItem("products", JSON.stringify(state.products)));
         },
         setFilteredProdyctsByCategory(state, action) {
             const category = action.payload;
@@ -41,6 +46,13 @@ const productsSlice = createSlice({
     },
 });
 
-export const { setLoading, setProducts, setProduct, setError ,setFilteredProdyctsByCategory} = productsSlice.actions;
+export const {
+    setLoading,
+    setProducts,
+    setProduct,
+    setError,
+    setDeleteProduct,
+    setFilteredProdyctsByCategory,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

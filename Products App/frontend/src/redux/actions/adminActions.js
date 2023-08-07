@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setDeleteProduct } from "../slices/products";
 
 const baseUrl = "http://localhost:5000/";
 
@@ -50,6 +51,8 @@ export const deleteProduct = (id) => async (dispatch) => {
             console.log("Login!!!");
             navigate("/");
         }
+
+        dispatch(setDeleteProduct(id));
     } catch (error) {
         console.log(error);
     }
@@ -57,13 +60,21 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 //EDIT Product
 export const editProduct =
-    (productName, productImage, productCategory, productDescription, productPrice, productStock) =>
+    (
+        productName,
+        productImage,
+        productCategory,
+        productDescription,
+        productPrice,
+        productStock,
+        _id
+    ) =>
     async (dispatch) => {
         try {
             const token = JSON.parse(localStorage.getItem("userInfo")).token;
             console.log(token);
             const response = await axios.put(
-                baseUrl + "products",
+                `${baseUrl}products/${_id}`,
                 {
                     // user: req.user._id,
                     name: productName,
@@ -84,7 +95,7 @@ export const editProduct =
                 navigate("/");
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     };
 

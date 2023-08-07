@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 //routes
 app.use("/products", productRoutes);
 app.use("/user", userRoutes);
-app.use("orders", orderRoutes);
+app.use("/orders", orderRoutes);
 
 //mogoose setup
 mongoose.set("strictQuery", false);

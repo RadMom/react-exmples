@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 //GET ALL PRODUCTS,method:GET
 //URL: /products
 const getAllProducts = async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort({ createdAt: -1 });
 
     if (products) {
         res.json(products);
@@ -32,7 +32,7 @@ const createProduct = async (req, res) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
 
     const newProduct = await Product.create({
-        user:req.user._id,
+        user: req.user._id,
         name,
         image,
         category,
@@ -69,7 +69,7 @@ const deleteProduct = async (req, res) => {
 //UPDATE PRODUCT ,method:PUT
 //URL: /products/:productId
 const updateProduct = async (req, res) => {
-    const { name, image, category, description, price, stock, productIsNew, } = req.body;
+    const { name, image, category, description, price, stock, productIsNew } = req.body;
     const product = await Product.findById(req.params.id);
 
     if (product) {

@@ -1,55 +1,80 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { createProduct } from "../../redux/actions/adminActions";
+import { createProduct, deleteProduct, editProduct } from "../../redux/actions/adminActions";
 
-const CreateProduct = () => {
-    const [productName, setProductName] = useState();
-    const [productImage, setProductImage] = useState();
-    const [productCategory, setProductCategory] = useState();
-    const [productDescription, setProductDescription] = useState();
-    const [productPrice, setProductPrice] = useState();
-    const [productStock, setProductStock] = useState();
+const ProductAdmin = (props) => {
+    const {
+        name,
+        description,
+        category,
+        image,
+        price,
+        numbersOfReviews,
+        rating,
+        reviews,
+        stock,
+        user,
+        createdAt,
+        updatedAt,
+        _id,
+    } = props.product;
+    console.log(`IMAGE : ${image}`);
+    const [productName, setProductName] = useState(name ? name : "");
+    const [productImage, setProductImage] = useState(image ? image : "");
+    const [productCategory, setProductCategory] = useState(category ? category : "");
+    const [productDescription, setProductDescription] = useState(description ? description : "");
+    const [productPrice, setProductPrice] = useState(price ? price : "");
+    const [productStock, setProductStock] = useState(stock ? stock : "");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const createProductHandler = async (e) => {
+    const deleteProductHandler = (e) => {
+        e.preventDefault();
+        dispatch(deleteProduct(_id));
+    };
+
+    const updateProductHandler = async (e) => {
         e.preventDefault();
         dispatch(
-            createProduct(
+            editProduct(
                 productName,
                 productImage,
                 productCategory,
                 productDescription,
                 productPrice,
-                productStock
+                productStock,
+                _id
             )
         );
+        // navigate("/admin/products");
     };
 
     return (
         <div>
-            <form onSubmit={createProductHandler}>
+            <form onSubmit={updateProductHandler}>
                 <label htmlFor="name">Product Name</label>
                 <input
                     type="text"
                     placeholder="Enter product name"
-                    id="productName"
+                    id="name"
                     onChange={(e) => setProductName(e.target.value)}
                     value={productName}
                 />
                 <label htmlFor="image">Image :</label>
                 <input
-                    type="file"
-                    id="productImage"
+                    type="text"
+                    id="image"
                     onChange={(e) => setProductImage(e.target.value)}
+                    value={productImage}
                 />
                 <label htmlFor="category">Product Category</label>
                 <input
                     type="text"
                     placeholder="Enter Category"
-                    id="productCategory"
+                    id="category"
                     onChange={(e) => setProductCategory(e.target.value)}
                     value={productCategory}
                 />
@@ -73,15 +98,15 @@ const CreateProduct = () => {
                 <input
                     type="number"
                     placeholder="Enter Stock"
-                    id="productStock"
+                    id="stock"
                     onChange={(e) => setProductStock(e.target.value)}
                     value={productStock}
                 />
 
-                <button type="submit">Create Product</button>
+                <button type="submit">Update Product </button>
             </form>
         </div>
     );
 };
 
-export default CreateProduct;
+export default ProductAdmin;
