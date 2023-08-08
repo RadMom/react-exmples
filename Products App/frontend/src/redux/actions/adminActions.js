@@ -2,13 +2,12 @@ import axios from "axios";
 import { setDeleteProduct } from "../slices/products";
 
 const baseUrl = "http://localhost:5000/";
+const token = JSON.parse(localStorage.getItem("userInfo")).token;
 
 export const createProduct =
     (productName, productImage, productCategory, productDescription, productPrice, productStock) =>
     async (dispatch) => {
         try {
-            const token = JSON.parse(localStorage.getItem("userInfo")).token;
-            console.log(token);
             const response = await axios.post(
                 baseUrl + "products",
                 {
@@ -38,8 +37,6 @@ export const createProduct =
 //DELETE Product
 export const deleteProduct = (id) => async (dispatch) => {
     try {
-        const token = JSON.parse(localStorage.getItem("userInfo")).token;
-        console.log(token);
         const response = await axios.delete(baseUrl + "products/" + id, {
             headers: { authorization: `Bearer ${token}` },
         });
@@ -54,7 +51,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch(setDeleteProduct(id));
     } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
     }
 };
 
@@ -71,8 +68,6 @@ export const editProduct =
     ) =>
     async (dispatch) => {
         try {
-            const token = JSON.parse(localStorage.getItem("userInfo")).token;
-            console.log(token);
             const response = await axios.put(
                 `${baseUrl}products/${_id}`,
                 {
@@ -101,8 +96,6 @@ export const editProduct =
 
 //GET ALL Users
 export const getAllUsers = () => async (dispatch) => {
-    dispatch(setLoading(true));
-
     try {
         const { data } = await axios.get(urlBase + "users");
         console.log(data);

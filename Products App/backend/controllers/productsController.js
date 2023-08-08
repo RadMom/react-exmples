@@ -3,26 +3,34 @@ const Product = require("../models/Product");
 //GET ALL PRODUCTS,method:GET
 //URL: /products
 const getAllProducts = async (req, res) => {
-    const products = await Product.find({}).sort({ createdAt: -1 });
+    try {
+        const products = await Product.find({}).sort({ createdAt: -1 });
 
-    if (products) {
-        res.json(products);
-    } else {
-        res.status(404);
-        throw new Error("Product not found.");
+        if (products) {
+            res.json(products);
+        } else {
+            res.status(404);
+            throw new Error("Products not found.");
+        }
+    } catch (error) {
+        res.json(error.message);
     }
 };
 
 //GET PRODUCT,method:GET
 //URL: /products/:productId
 const getProduct = async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    try {
+        const product = await Product.findById(req.params.id);
 
-    if (product) {
-        res.json(product);
-    } else {
-        res.status(404);
-        throw new Error("Product not found.");
+        if (product) {
+            res.json(product);
+        } else {
+            res.status(404);
+            throw new Error("Product not found.");
+        }
+    } catch (error) {
+        res.json(error.message);
     }
 };
 
@@ -30,6 +38,7 @@ const getProduct = async (req, res) => {
 //URL: /products
 const createProduct = async (req, res) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
+
     try {
         if (name && image && category && description && price && stock) {
             const newProduct = await Product.create({
@@ -60,13 +69,17 @@ const createProduct = async (req, res) => {
 //URL: /products/:productId
 const deleteProduct = async (req, res) => {
     console.log(req.params.id);
-    const product = await Product.findByIdAndDelete(req.params.id);
-    console.log(product);
-    if (product) {
-        res.json(product);
-    } else {
-        res.status(404);
-        throw new Error("Product not found");
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+
+        if (product) {
+            res.json(product);
+        } else {
+            res.status(404);
+            throw new Error("Product not found");
+        }
+    } catch (error) {
+        res.status(404).json(error.message);
     }
 };
 
@@ -88,9 +101,9 @@ const updateProduct = async (req, res) => {
 
                 const updatedProduct = await product.save();
                 res.json(updatedProduct);
-            }else{
+            } else {
                 res.status(404);
-            throw new Error("Fill all fields!!!");
+                throw new Error("Fill all fields!!!");
             }
         } else {
             res.status(404);
