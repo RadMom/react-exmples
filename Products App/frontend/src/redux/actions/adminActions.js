@@ -31,7 +31,7 @@ export const createProduct =
                 navigate("/");
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.response.data);
         }
     };
 
@@ -54,7 +54,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch(setDeleteProduct(id));
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
     }
 };
 
@@ -95,7 +95,7 @@ export const editProduct =
                 navigate("/");
             }
         } catch (error) {
-            console.log(error.message);
+            console.log(error.response.data);
         }
     };
 

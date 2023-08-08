@@ -30,26 +30,29 @@ const getProduct = async (req, res) => {
 //URL: /products
 const createProduct = async (req, res) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
-
-    const newProduct = await Product.create({
-        user: req.user._id,
-        name,
-        image,
-        category,
-        description,
-        price,
-        stock,
-        productIsNew,
-    });
-    await newProduct.save();
-
-    const products = await Product.find({});
-
-    if (newProduct) {
-        res.json(products);
-    } else {
-        res.status(404);
-        throw new Error("Product could not be uploaded.");
+    try {
+        if (name && image && category && description && price && stock) {
+            const newProduct = await Product.create({
+                user: req.user._id,
+                name,
+                image,
+                category,
+                description,
+                price,
+                stock,
+                productIsNew,
+            });
+            await newProduct.save();
+            if (newProduct) {
+                const products = await Product.find({});
+                res.json(products);
+            }
+        } else {
+            res.status(404);
+            throw new Error("Product could not be uploaded.");
+        }
+    } catch (error) {
+        res.json(error.message);
     }
 };
 
@@ -63,6 +66,7 @@ const deleteProduct = async (req, res) => {
         res.json(product);
     } else {
         res.status(404);
+        throw new Error("Product not found");
     }
 };
 
@@ -70,22 +74,30 @@ const deleteProduct = async (req, res) => {
 //URL: /products/:productId
 const updateProduct = async (req, res) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
-    const product = await Product.findById(req.params.id);
+    try {
+        const product = await Product.findById(req.params.id);
+        if (product) {
+            if (name && image && category && description && price && stock) {
+                product.name = name;
+                product.image = image;
+                product.category = category;
+                product.description = description;
+                product.price = price;
+                product.stock = stock;
+                product.productIsNew = productIsNew;
 
-    if (product) {
-        product.name = name;
-        product.image = image;
-        product.category = category;
-        product.description = description;
-        product.price = price;
-        product.stock = stock;
-        product.productIsNew = productIsNew;
-
-        const updatedProduct = await product.save();
-        res.json(updatedProduct);
-    } else {
-        res.status(404);
-        throw new Error("Product not found.");
+                const updatedProduct = await product.save();
+                res.json(updatedProduct);
+            }else{
+                res.status(404);
+            throw new Error("Fill all fields!!!");
+            }
+        } else {
+            res.status(404);
+            throw new Error("Product not found.");
+        }
+    } catch (error) {
+        res.status(404).json(error.message);
     }
 };
 

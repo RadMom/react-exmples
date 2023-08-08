@@ -20,7 +20,7 @@ const ProductAdmin = (props) => {
         updatedAt,
         _id,
     } = props.product;
-    console.log(`IMAGE : ${image}`);
+
     const [productName, setProductName] = useState(name ? name : "");
     const [productImage, setProductImage] = useState(image ? image : "");
     const [productCategory, setProductCategory] = useState(category ? category : "");
@@ -32,7 +32,6 @@ const ProductAdmin = (props) => {
     const navigate = useNavigate();
 
     const deleteProductHandler = (e) => {
-        e.preventDefault();
         dispatch(deleteProduct(_id));
     };
 
@@ -69,6 +68,7 @@ const ProductAdmin = (props) => {
                     id="image"
                     onChange={(e) => setProductImage(e.target.value)}
                     value={productImage}
+                    required
                 />
                 <label htmlFor="category">Product Category</label>
                 <input
@@ -77,6 +77,7 @@ const ProductAdmin = (props) => {
                     id="category"
                     onChange={(e) => setProductCategory(e.target.value)}
                     value={productCategory}
+                    required
                 />
                 <label htmlFor="description">Product Description</label>
                 <input
@@ -85,6 +86,7 @@ const ProductAdmin = (props) => {
                     id="description"
                     onChange={(e) => setProductDescription(e.target.value)}
                     value={productDescription}
+                    required
                 />
                 <label htmlFor="price">Product Price</label>
                 <input
@@ -93,6 +95,7 @@ const ProductAdmin = (props) => {
                     id="price"
                     onChange={(e) => setProductPrice(e.target.value)}
                     value={productPrice}
+                    required
                 />
                 <label htmlFor="stock">Product Stock</label>
                 <input
@@ -101,10 +104,13 @@ const ProductAdmin = (props) => {
                     id="stock"
                     onChange={(e) => setProductStock(e.target.value)}
                     value={productStock}
+                    required
                 />
-
                 <button type="submit">Update Product </button>
             </form>
+            <div>
+                <button onClick={deleteProductHandler}>Delete</button>
+            </div>
         </div>
     );
 };

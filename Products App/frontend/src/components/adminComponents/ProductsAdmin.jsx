@@ -22,12 +22,6 @@ const ProductsAdmin = () => {
         console.log("PRODUCTS ADMIN");
     }, [dispatch]);
 
-    const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id));
-    };
-
-    const editProductHandler = () => {};
-
     return (
         <div className={classes.products}>
             <ul className={classes.list}>
@@ -35,7 +29,6 @@ const ProductsAdmin = () => {
                     products.map((product) => (
                         <li key={product._id}>
                             <ProductAdmin product={product} />
-                            <button onClick={() => deleteProductHandler(product._id)}>Delete</button>
                         </li>
                     ))
                 ) : (

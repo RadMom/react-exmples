@@ -40,6 +40,7 @@ const ProductForm = () => {
                     id="name"
                     onChange={(e) => setProductName(e.target.value)}
                     value={productName}
+                    required
                 />
                 <label htmlFor="image">Image :</label>
                 <input
