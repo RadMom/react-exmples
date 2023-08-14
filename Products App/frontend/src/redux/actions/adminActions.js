@@ -2,7 +2,11 @@ import axios from "axios";
 import { setDeleteProduct } from "../slices/products";
 
 const baseUrl = "http://localhost:5000/";
-const token = JSON.parse(localStorage.getItem("userInfo")).token;
+const getToken = JSON.parse(localStorage.getItem("userInfo")) || undefined;
+let token = "";
+if (getToken) {
+    token = getToken.token;
+}
 
 export const createProduct =
     (productName, productImage, productCategory, productDescription, productPrice, productStock) =>

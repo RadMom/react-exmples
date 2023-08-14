@@ -1,0 +1,16 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+    border-bottom: solid 2px black;
+}
+.descriptions {
+    overflow: auto;
+    max-height: fit-content;
+    width: 30%;
+}
+.image {
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+}

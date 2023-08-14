@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     products: [],
+    filteredProducts: [],
     product: null,
     loading: false,
     error: null,
@@ -36,12 +37,10 @@ const productsSlice = createSlice({
         },
         setFilteredProdyctsByCategory(state, action) {
             const category = action.payload;
-            const filteredProducts = state.products.filter(
+            state.filteredProducts = state.products.filter(
                 (product) => product.category === category
             );
-            state.products = filteredProducts;
-            JSON.stringify(localStorage.setItem("products", JSON.stringify(filteredProducts)));
-            console.log(state.products);
+            console.log(state.filteredProducts);
         },
     },
 });

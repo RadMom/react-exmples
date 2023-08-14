@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { createProduct, deleteProduct, editProduct } from "../../redux/actions/adminActions";
 
+import classes from "./ProductsAdmin.module.css";
+
 const ProductAdmin = (props) => {
     const {
         name,
@@ -52,8 +54,8 @@ const ProductAdmin = (props) => {
     };
 
     return (
-        <div>
-            <form onSubmit={updateProductHandler}>
+        <div >
+            <form className={classes.item} onSubmit={updateProductHandler}>
                 <label htmlFor="name">Product Name</label>
                 <input
                     type="text"
@@ -107,10 +109,8 @@ const ProductAdmin = (props) => {
                     required
                 />
                 <button type="submit">Update Product </button>
-            </form>
-            <div>
                 <button onClick={deleteProductHandler}>Delete</button>
-            </div>
+            </form>
         </div>
     );
 };

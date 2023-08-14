@@ -9,9 +9,11 @@ import { BiUserCircle } from "react-icons/bi";
 import { logout } from "../../redux/authSlice";
 
 import classes from "./MainNavigation.module.css";
+import AdminNav from "./AdminNav";
 
 const MainNavigation = () => {
     const { userInfo } = useSelector((state) => state.auth);
+
     const cart = useSelector((state) => state.cart);
 
     const navigate = useNavigate();
@@ -102,6 +104,7 @@ const MainNavigation = () => {
                     </div>
                 )}
             </div>
+            {userInfo ? userInfo.idAdmin && <AdminNav /> : ""}
         </header>
     );
 };

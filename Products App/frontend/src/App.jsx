@@ -62,7 +62,7 @@ function App() {
                 //admin routes
                 {
                     path: "admin",
-                    element: <AdminDushboard />,
+                    // element: <AdminDushboard />,
                     children: [
                         { path: "products", element: <ProductsAdmin /> },
                         { path: "users", element: <UsersAdmin /> },

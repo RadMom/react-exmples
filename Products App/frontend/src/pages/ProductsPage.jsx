@@ -5,20 +5,16 @@ import { getProducts } from "../redux/actions/productsActions";
 import ProductsList from "../components/Products/ProductsList";
 
 const ProductsPage = () => {
-    const productsList = useSelector((state) => state.products);
-    const { products } = productsList;
+    const products = useSelector((state) => state.products.products);
+    const filteredProducts = useSelector((state) => state.products.filteredProducts);
+    // const products = data.filteredProducts.length > 0 ? data.filteredProducts : data.products;
     const dispatch = useDispatch();
-    console.log(productsList);
 
-    //MUST CHECK localeStorage ???
-    
-    const test = JSON.parse(localStorage.getItem("products"));
-    console.log(test);
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
 
-    return <ProductsList products={test} />;
+    return <ProductsList products={filteredProducts.length > 0 ? filteredProducts : products} />;
 };
 
 export default ProductsPage;

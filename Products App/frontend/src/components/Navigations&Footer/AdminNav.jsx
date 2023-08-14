@@ -9,7 +9,7 @@ const AdminNav = () => {
             <ul>
                 <li>
                     <NavLink
-                        to="products"
+                        to="admin/products"
                         className={({ isActive }) => (isActive ? classes.active : undefined)}
                         end
                     >
@@ -18,7 +18,7 @@ const AdminNav = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="users"
+                        to="admin/users"
                         className={({ isActive }) => (isActive ? classes.active : undefined)}
                     >
                         Users
@@ -26,7 +26,7 @@ const AdminNav = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="orders"
+                        to="admin/orders"
                         className={({ isActive }) => (isActive ? classes.active : undefined)}
                     >
                         Orders
@@ -34,7 +34,7 @@ const AdminNav = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="create"
+                        to="admin/create"
                         className={({ isActive }) => (isActive ? classes.active : undefined)}
                     >
                         Create Product
