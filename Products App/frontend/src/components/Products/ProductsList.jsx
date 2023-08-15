@@ -6,30 +6,36 @@ import classes from "./ProductsList.module.css";
 
 const ProductsList = (props) => {
     const products = props.products;
-console.log(products);
+    const error = props.error;
+    console.log(products);
     return (
-        <div className={classes.products}>
-            <ul className={classes.list}>
-                {products ? (
-                    products.map((product) => (
-                        <li
-                            key={product._id}
-                            className={classes.item}
-                        >
-                            <ProductDetails
-                                id={product._id}
-                                key={product._id}
-                                image={product.image}
-                                title={product.name}
-                                description={product.description}
-                                price={product.price}
-                            ></ProductDetails>
-                        </li>
-                    ))
-                ) : (
-                    <p>No Products</p>
-                )}
-            </ul>
+        <div>
+            {error ? (
+                <p>{error}</p>
+            ) : (
+                <div className={classes.products}>
+                    <ul className={classes.list}>
+                        {products ? (
+                            products.map((product) => (
+                                <li
+                                    key={product._id}
+                                    className={classes.item}
+                                >
+                                    <ProductDetails
+                                        id={product._id}
+                                        image={product.image}
+                                        title={product.name}
+                                        description={product.description}
+                                        price={product.price}
+                                    ></ProductDetails>
+                                </li>
+                            ))
+                        ) : (
+                            <p>No Products</p>
+                        )}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };

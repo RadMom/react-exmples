@@ -5,13 +5,13 @@ import Footer from "../components/Navigations&Footer/Footer";
 
 const RootLayout = () => {
     return (
-        <>
+        <div id="content-wrap">
             <MainNavigation />
             <main>
                 <Outlet />
             </main>
             <Footer />
-        </>
+        </div>
     );
 };
 

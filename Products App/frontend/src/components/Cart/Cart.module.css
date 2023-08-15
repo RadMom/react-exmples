@@ -1,4 +1,10 @@
-.cart{
+.cart {
     display: flex;
     flex-direction: column;
+}
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border: solid 1px black;
 }

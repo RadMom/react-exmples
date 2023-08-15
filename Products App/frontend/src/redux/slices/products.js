@@ -40,6 +40,11 @@ const productsSlice = createSlice({
             state.filteredProducts = state.products.filter(
                 (product) => product.category === category
             );
+            if (state.filteredProducts.length === 0) {
+                state.error = "no products";
+                return;
+            }
+            state.error = null;
             console.log(state.filteredProducts);
         },
     },

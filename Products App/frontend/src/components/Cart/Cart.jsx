@@ -1,36 +1,23 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { cartAcrions } from "../../redux/cartSlice";
+import { useSelector } from "react-redux";
 
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 
 const Cart = () => {
-    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
-    const subtractItemHandler = (id) => {
-        dispatch(cartAcrions.subtractItemFromCart(id));
-    };
-
-    const addItemHandler = (item) => {
-        dispatch(cartAcrions.addItemToCart(item));
-    };
-
+    //Must finish order action
     const orderHandler = () => {};
     return (
-        <div >
+        <div>
             {cart.items.length > 0 ? (
                 <div className={classes.cart}>
                     <div>
-                        <ul>
+                        <ul className={classes.cartItems}>
                             {cart.items.map((item) => (
                                 <li key={item.id}>
-                                    <CartItem
-                                        item={item}
-                                        onSubtract={subtractItemHandler}
-                                        onAdd={addItemHandler}
-                                    />
+                                    <CartItem item={item} />
                                 </li>
                             ))}
                         </ul>

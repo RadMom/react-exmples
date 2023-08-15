@@ -7,6 +7,7 @@ import ProductsList from "../components/Products/ProductsList";
 const ProductsPage = () => {
     const products = useSelector((state) => state.products.products);
     const filteredProducts = useSelector((state) => state.products.filteredProducts);
+    const error = useSelector((state) => state.products.error);
     // const products = data.filteredProducts.length > 0 ? data.filteredProducts : data.products;
     const dispatch = useDispatch();
 
@@ -14,7 +15,12 @@ const ProductsPage = () => {
         dispatch(getProducts());
     }, [dispatch]);
 
-    return <ProductsList products={filteredProducts.length > 0 ? filteredProducts : products} />;
+    return (
+        <ProductsList
+            products={filteredProducts.length > 0 ? filteredProducts : products}
+            error={error}
+        />
+    );
 };
 
 export default ProductsPage;
