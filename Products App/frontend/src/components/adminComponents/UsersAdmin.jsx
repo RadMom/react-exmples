@@ -5,6 +5,7 @@ import { getAllUsers } from "../../redux/actions/adminActions";
 
 const UsersAdmin = () => {
     const users = useSelector((state) => state.users);
+    console.log(users);
     const dispatch = useDispatch();
 
     useEffect(() => {

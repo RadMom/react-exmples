@@ -7,7 +7,7 @@ import classes from "./ProductsList.module.css";
 const ProductsList = (props) => {
     const products = props.products;
     const error = props.error;
-    console.log(products);
+    
     return (
         <div>
             {error ? (

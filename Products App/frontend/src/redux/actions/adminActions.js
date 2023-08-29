@@ -101,19 +101,13 @@ export const editProduct =
 //GET ALL Users
 export const getAllUsers = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(urlBase + "users");
+        const { data } = await axios.get(baseUrl + "user", {
+            headers: { authorization: `Bearer ${token}` },
+        });
         console.log(data);
         dispatch(setUsers(data));
     } catch (error) {
-        dispatch(
-            setError(
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
-                    ? error.message
-                    : "An unexpected error ..."
-            )
-        );
+        console.log(error);
     }
 };
 

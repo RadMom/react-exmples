@@ -9,8 +9,7 @@ export const getProducts = () => async (dispatch) => {
     dispatch(setLoading(true));
 
     try {
-        const {data} = await axios.get(urlBase + "products");
-        console.log(data);
+        const { data } = await axios.get(urlBase + "products");
         dispatch(setProducts(data));
     } catch (error) {
         dispatch(
@@ -26,11 +25,11 @@ export const getProducts = () => async (dispatch) => {
 };
 
 //GET SINGLE Product
-export const getSingleProduct= (id) => async (dispatch) => {
+export const getSingleProduct = (id) => async (dispatch) => {
     dispatch(setLoading(true));
 
     try {
-        const {data} = await axios.get(urlBase + {id});
+        const { data } = await axios.get(urlBase + { id });
         console.log(data);
         dispatch(setProducts(data));
     } catch (error) {
@@ -45,5 +44,3 @@ export const getSingleProduct= (id) => async (dispatch) => {
         );
     }
 };
-
-
