@@ -22,6 +22,7 @@ export const getProducts = () => async (dispatch) => {
             )
         );
     }
+    dispatch(setLoading(false))
 };
 
 //GET SINGLE Product
@@ -31,7 +32,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
     try {
         const { data } = await axios.get(urlBase + { id });
         console.log(data);
-        dispatch(setProducts(data));
+        dispatch(setProduct(data));
     } catch (error) {
         dispatch(
             setError(

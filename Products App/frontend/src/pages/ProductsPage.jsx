@@ -5,6 +5,7 @@ import { getProducts } from "../redux/actions/productsActions";
 import ProductsList from "../components/Products/ProductsList";
 
 const ProductsPage = () => {
+    console.log("ProductPage");
     const products = useSelector((state) => state.products.products);
     const filteredProducts = useSelector((state) => state.products.filteredProducts);
     const error = useSelector((state) => state.products.error);

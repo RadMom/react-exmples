@@ -27,6 +27,7 @@ import OrdersAdmin from "./components/adminComponents/OrdersAdmin";
 import CreateProduct from "./pages/admin/ProductForm";
 
 function App() {
+    console.log("App.jsx");
     const dispatch = useDispatch();
 
     useEffect(() => {

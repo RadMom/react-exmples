@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setDeleteProduct } from "../slices/products";
+import { setProducts, setDeleteProduct } from "../slices/products";
 
 const baseUrl = "http://localhost:5000/";
 const getToken = JSON.parse(localStorage.getItem("userInfo")) || undefined;
@@ -26,13 +26,13 @@ export const createProduct =
                 { headers: { authorization: `Bearer ${token}` } }
             );
 
-            if (response.statusText !== "OK") {
-                console.log(response);
-                dispatch(login(response.data));
+            // if (response.statusText !== "OK") {
+            //     console.log(response);
+            //     dispatch(login(response.data));
 
-                console.log("Login!!!");
-                navigate("/");
-            }
+            //     console.log("Login!!!");
+            //     navigate("/");
+            // }
         } catch (error) {
             console.log(error.response.data);
         }
@@ -93,6 +93,8 @@ export const editProduct =
                 console.log("Login!!!");
                 navigate("/");
             }
+            console.log(response.data);
+            dispatch(setProducts(response.data));
         } catch (error) {
             console.log(error.response.data);
         }

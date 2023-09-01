@@ -5,6 +5,7 @@ import { login } from "../redux/authSlice";
 import axios from "axios";
 
 const LoginPage = () => {
+    console.log("LoginPage.jsx");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -20,10 +21,8 @@ const LoginPage = () => {
             });
 
             if (response.statusText === "OK") {
-                console.log(response);
                 dispatch(login(response.data));
-                
-                console.log("Login!!!");
+
                 navigate("/");
             }
         } catch (error) {
