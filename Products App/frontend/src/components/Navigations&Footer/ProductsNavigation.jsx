@@ -3,7 +3,7 @@ import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilteredProdyctsByCategory } from "../../redux/slices/products";
 
-const categories = ["test1", "test2", "test3", "test4", "test5"];
+const categories = ["All", "test1", "test2", "test3", "test4"];
 
 const ProductsNavigation = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,12 @@ const ProductsNavigation = () => {
         <div className={classes.productsNav}>
             <p>Category</p>
             {categories.map((category) => (
-                <button key={category} onClick={() => filterHandler(category)}>{category}</button>
+                <button
+                    key={category}
+                    onClick={() => filterHandler(category)}
+                >
+                    {category}
+                </button>
             ))}
         </div>
     );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setProducts, setDeleteProduct } from "../slices/products";
+import { setUpdatedProducts, setDeleteProduct } from "../slices/products";
 import { setUsers } from "../slices/adminSlice";
 
 const baseUrl = "http://localhost:5000/";
@@ -95,9 +95,9 @@ export const editProduct =
                 navigate("/");
             }
             console.log(response.data);
-            dispatch(setProducts(response.data));
+            dispatch(setUpdatedProducts(response.data));
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
         }
     };
 

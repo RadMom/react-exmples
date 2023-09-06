@@ -23,6 +23,8 @@ const productsSlice = createSlice({
         },
         setProduct(state, action) {
             state.product = action.payload;
+            state.loading = false;
+            state.error = null;
             JSON.stringify(localStorage.setItem("product", action.payload));
         },
         setError(state, action) {
@@ -33,10 +35,29 @@ const productsSlice = createSlice({
             const id = action.payload;
             state.products = state.products.filter((product) => product._id !== id);
             console.log(state.products);
+            state.loading = false;
+            state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(state.products)));
+        },
+        setUpdatedProducts(state, action) {
+            const { _id } = action.payload;
+            let index = state.products.findIndex((product) => product._id === _id);
+            console.log(index);
+            if (index >= 0) {
+                state.products[index] = action.payload;
+                JSON.stringify(localStorage.setItem("products", JSON.stringify(state.products)));
+                console.log(state.products[index]);
+            } else {
+                state.error = "Can not update product...";
+            }
         },
         setFilteredProdyctsByCategory(state, action) {
             const category = action.payload;
+            if (category === "All") {
+                state.filteredProducts = state.products;
+                return;
+            }
+
             state.filteredProducts = state.products.filter(
                 (product) => product.category === category
             );
@@ -56,6 +77,7 @@ export const {
     setProduct,
     setError,
     setDeleteProduct,
+    setUpdatedProducts,
     setFilteredProdyctsByCategory,
 } = productsSlice.actions;
 
