@@ -34,6 +34,7 @@ const ProductAdmin = (props) => {
     const navigate = useNavigate();
 
     const deleteProductHandler = (e) => {
+        e.preventDefault();
         dispatch(deleteProduct(_id));
     };
 
@@ -54,8 +55,8 @@ const ProductAdmin = (props) => {
     };
 
     return (
-        <div >
-            <form className={classes.item} onSubmit={updateProductHandler}>
+        <div>
+            <form className={classes.item}>
                 <label htmlFor="name">Product Name</label>
                 <input
                     type="text"
@@ -108,7 +109,7 @@ const ProductAdmin = (props) => {
                     value={productStock}
                     required
                 />
-                <button type="submit">Update Product </button>
+                <button onClick={updateProductHandler}>Update Product </button>
                 <button onClick={deleteProductHandler}>Delete</button>
             </form>
         </div>

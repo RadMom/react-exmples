@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { cartAcrions } from "../../redux/cartSlice";
+import { cartAcrions } from "../../redux/slices/cartSlice";
 import { deleteProduct } from "../../redux/actions/adminActions";
 
 import Card from "../../UI/Card";

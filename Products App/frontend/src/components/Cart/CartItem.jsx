@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { cartAcrions } from "../../redux/cartSlice";
+import { cartAcrions } from "../../redux/slices/cartSlice";
 
 import classes from "./CartItem.module.css";
 

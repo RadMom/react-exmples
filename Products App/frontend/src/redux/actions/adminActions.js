@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setProducts, setDeleteProduct } from "../slices/products";
+import { setUsers } from "../slices/adminSlice";
 
 const baseUrl = "http://localhost:5000/";
 const getToken = JSON.parse(localStorage.getItem("userInfo")) || undefined;
