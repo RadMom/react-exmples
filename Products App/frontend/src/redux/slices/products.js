@@ -54,7 +54,7 @@ const productsSlice = createSlice({
         setFilteredProdyctsByCategory(state, action) {
             const category = action.payload;
             if (category === "All") {
-                state.filteredProducts = state.products;
+                state.filteredProducts = [];
                 return;
             }
 
