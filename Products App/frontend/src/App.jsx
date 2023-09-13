@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -11,6 +11,15 @@ import RootLayout from "./layouts/RootLayout";
 import ProductsLayout from "./layouts/ProductsLayout";
 
 //pages
+// const HomePage = lazy(() => import("./pages/HomePage"));
+// const ProductsPage = lazy(() => import("./pages/ProductsPage"));
+// const AboutPage = lazy(() => import("./pages/AboutPage"));
+// const ProductDetailsPage = lazy(() => import("./pages/ProductDetailsPage"));
+// const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+// const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
+// const LoginPage = lazy(() => import("./pages/LoginPage"));
+// const Cart = lazy(() => import("./components/Cart/Cart"));
+
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import AboutPage from "./pages/AboutPage";

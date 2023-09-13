@@ -133,4 +133,4 @@ export const getUserOrders = (id) => async (dispatch) => {};
 export const deleteOrder = (id) => async (dispatch) => {};
 
 //EDIT Order
-export const consteditOrder = () => async (dispatch) => {}; //must check what to pass
+export const editOrder = () => async (dispatch) => {}; //must check what to pass
