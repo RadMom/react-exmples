@@ -1,14 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
 html {
-    background: rgb(250, 252, 250);
-    position: relative;
-    min-height: 100vh;
-    margin: 0px;
+    height: 100%;
 }
 
-
-#content-wrap {
-    padding-bottom: 2.5rem; /* Footer height */
+body {
+    height: 100%;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
-body{
-    margin: 0px;
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+main {
+    flex-grow: 1;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
 }

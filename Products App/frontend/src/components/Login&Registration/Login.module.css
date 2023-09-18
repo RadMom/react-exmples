@@ -1,0 +1,28 @@
+.login {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    margin: auto;
+}
+h2 {
+    text-align: center;
+    padding: 10px;
+}
+form label {
+    padding: 5px;
+}
+form input {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* button */
+button {
+    height: 40px;
+    width: 100%;
+    margin-top: 35px;
+    border-radius: 10px;
+}

@@ -17,7 +17,7 @@ const RegistrationPage = () => {
                         placeholder="Enter name"
                         id="name"
                         onChange={(e) => setName(e.target.value)}
-                        value={email}
+                        value={name}
                     />
                 </div>
                 <div>

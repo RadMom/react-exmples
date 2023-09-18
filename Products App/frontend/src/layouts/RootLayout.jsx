@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 const RootLayout = () => {
     return (
-        <div id="content-wrap">
+        <>
             <Suspense fallback={<p>Loading...</p>}>
                 <MainNavigation />
                 <main>
@@ -14,7 +14,7 @@ const RootLayout = () => {
                 </main>
                 <Footer />
             </Suspense>
-        </div>
+        </>
     );
 };
 
