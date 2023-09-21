@@ -10,7 +10,9 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        login: (state, actions) => {
+        setLogin(state, actions) {
+            state.error = null;
+            state.isLoading = true;
             state.userInfo = actions.payload;
             localStorage.setItem("userInfo", JSON.stringify(actions.payload));
 
@@ -18,16 +20,21 @@ const authSlice = createSlice({
             const expirationTime = new Date().getTime() + 1 * 24 * 60 * 60 * 1000; //1 day
             localStorage.setItem("expirationTime", expirationTime);
             console.log(expirationTime);
+            state.isLoading = false;
         },
 
-        logout: (state, actions) => {
+        setLogout(state, actions) {
             state.userInfo = null;
             localStorage.removeItem("userInfo");
             localStorage.removeItem("expirationTime");
             localStorage.removeItem("products");
         },
+
+        setError(state, actions) {
+            state.error = actions.payload;
+        },
     },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { setLogin, setLogout, setError } = authSlice.actions;
 export default authSlice.reducer;

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsCart2 } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 
-import { logout } from "../../redux/authSlice";
+import { setLogout } from "../../redux/authSlice";
 
 import classes from "./MainNavigation.module.css";
 import AdminNav from "./AdminNav";
@@ -20,7 +20,7 @@ const MainNavigation = () => {
     const dispatch = useDispatch();
 
     const logoutHandler = (e) => {
-        dispatch(logout());
+        dispatch(setLogout());
         navigate("/");
     };
     return (
@@ -37,7 +37,7 @@ const MainNavigation = () => {
                                 }
                                 end
                             >
-                                Home Page
+                                Home
                             </NavLink>
                         </li>
                         <li>
@@ -47,7 +47,7 @@ const MainNavigation = () => {
                                     isActive ? classes.active : undefined
                                 }
                             >
-                                Products Page
+                                Products
                             </NavLink>
                         </li>
                         <li>
@@ -57,7 +57,7 @@ const MainNavigation = () => {
                                     isActive ? classes.active : undefined
                                 }
                             >
-                                About Page
+                                About
                             </NavLink>
                         </li>
                         {!userInfo && (
@@ -90,10 +90,7 @@ const MainNavigation = () => {
                     <div className={classes.userInfo}>
                         <BiUserCircle /> <p> {userInfo.email}</p>
                         <button onClick={logoutHandler}>Logout</button>
-                        <NavLink
-                            to="/cart"
-                            className={classes.cart}
-                        >
+                        <NavLink to="/cart" className={classes.cart}>
                             <span className={classes.icon}>
                                 <BsCart2 />
                             </span>

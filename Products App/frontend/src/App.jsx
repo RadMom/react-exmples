@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 
-import { logout } from "./redux/authSlice";
+import { setLogout } from "./redux/authSlice";
 
 //layouts
 import RootLayout from "./layouts/RootLayout";
@@ -45,7 +45,7 @@ function App() {
             const currentTime = new Date().getTime();
 
             if (currentTime > expirationTime) {
-                dispatch(logout());
+                dispatch(setLogout());
             }
         }
     }, [dispatch]);
