@@ -8,7 +8,7 @@ let token = "";
 if (getToken) {
     token = getToken.token;
 }
-
+console.log(token);
 export const createProduct =
     (productName, productImage, productCategory, productDescription, productPrice, productStock) =>
     async (dispatch) => {
@@ -42,6 +42,7 @@ export const createProduct =
 //DELETE Product
 export const deleteProduct = (id) => async (dispatch) => {
     try {
+        console.log(token);
         const response = await axios.delete(baseUrl + "products/" + id, {
             headers: { authorization: `Bearer ${token}` },
         });

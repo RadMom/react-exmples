@@ -80,7 +80,11 @@ const Login = () => {
 
                 <h2>Welcome</h2>
 
-                <form onSubmit={formSubmitHandler} autoComplete="on">
+                <form
+                    onSubmit={formSubmitHandler}
+                    autoComplete="on"
+                    className={classes["login-form"]}
+                >
                     <div
                         className={
                             emailError

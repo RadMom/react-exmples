@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllUsers } from "../../redux/actions/adminActions";
+import UserInfoAdmin from "./UserInfoAdmin";
 
 const UsersAdmin = () => {
     const { users } = useSelector((state) => state.admin);
@@ -14,7 +15,7 @@ const UsersAdmin = () => {
     return (
         <div>
             {users && users.length > 0 ? (
-                users.map((user) => <p key={user._id}>{user.name}</p>)
+                users.map((user) => <UserInfoAdmin key={user._id} user={user} />)
             ) : (
                 <p>No users</p>
             )}

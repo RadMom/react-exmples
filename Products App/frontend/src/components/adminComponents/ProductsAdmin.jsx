@@ -23,18 +23,12 @@ const ProductsAdmin = () => {
     }, [dispatch]);
 
     return (
-        <div className={classes.products}>
-            <ul className={classes.list}>
-                {products && products.length > 0 ? (
-                    products.map((product) => (
-                        <li key={product._id}>
-                            <ProductAdmin product={product} />
-                        </li>
-                    ))
-                ) : (
-                    <p>No Products</p>
-                )}
-            </ul>
+        <div className={classes["products-list"]}>
+            {products && products.length > 0 ? (
+                products.map((product) => <ProductAdmin key={product._id} product={product} />)
+            ) : (
+                <p>No Products</p>
+            )}
         </div>
     );
 };

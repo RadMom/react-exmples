@@ -55,8 +55,8 @@ const ProductAdmin = (props) => {
     };
 
     return (
-        <div>
-            <form className={classes.item}>
+        <div className={classes["product-container"]}>
+            <form className={classes["product-form"]}>
                 <label htmlFor="name">Product Name</label>
                 <input
                     type="text"

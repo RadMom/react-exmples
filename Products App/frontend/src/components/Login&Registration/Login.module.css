@@ -2,8 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100%;
-    min-width: 100%;
+    flex-grow: 1;
 }
 .login {
     display: flex;
@@ -16,7 +15,7 @@
     background-color: var(--clr-neutral-700);
     border-radius: 20px;
 }
-form {
+.login-form {
     display: flex;
     flex-direction: column;
     width: 70%;

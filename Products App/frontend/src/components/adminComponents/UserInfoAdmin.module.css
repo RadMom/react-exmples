@@ -1,0 +1,8 @@
+.user-container {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+.user-form {
+    width: 50%;
+}

@@ -1,8 +1,7 @@
-.item{
-    display: flex;
-    justify-content: space-between;
-    height: 250px;
-    border-bottom: solid 2px black;
+.product-container {
+    border: 1px solid black;
+}
+.product-form {
 }
 .descriptions {
     overflow: auto;
