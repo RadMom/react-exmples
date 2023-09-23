@@ -1,8 +1,9 @@
 .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100%;
     min-width: 100%;
-    background-color: var(--clr-neutral-700);
-    align-items: center;
 }
 .login {
     display: flex;
@@ -11,7 +12,7 @@
     align-items: center;
     width: 70%;
     max-width: 600px;
-    margin: 30px auto;
+
     background-color: var(--clr-neutral-700);
     border-radius: 20px;
 }
@@ -58,7 +59,8 @@ h2 {
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px blue inset; /* Change the color to your own background color */
+    -webkit-box-shadow: 0 0 0 50px blue inset;
+    /* Change the color to your own background color */
     -webkit-text-fill-color: white;
 }
 input:-webkit-autofill:focus {
@@ -85,8 +87,11 @@ input:-webkit-autofill:focus {
 /* errors */
 .input-group.error input {
     font-size: 1.3em;
-    box-shadow: 0 0 10px red;
-    background-color: rgba(255, 0, 64, 0.973) !important;
+    box-shadow: 0 0 10px red !important;
+    background-color: rgba(255, 0, 64, 0.973);
+    -webkit-box-shadow: 0 0 0 50px rgba(255, 0, 64, 0.973) inset !important ;
+    /* Change the color to your own background color */
+    -webkit-text-fill-color: white;
 }
 
 .input-group.error .msg {

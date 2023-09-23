@@ -55,11 +55,6 @@ h6 {
     isolation: isolate;
 }
 
-html {
-    min-height: 100vh;
-    min-width: 100vw;
-}
-
 main {
     flex-grow: 1;
     display: flex;
@@ -69,4 +64,5 @@ main {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--clr-neutral-100);
 }
