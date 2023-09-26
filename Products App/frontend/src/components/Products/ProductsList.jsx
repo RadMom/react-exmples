@@ -7,7 +7,7 @@ import classes from "./ProductsList.module.css";
 const ProductsList = (props) => {
     const products = props.products;
     const error = props.error;
-    
+
     return (
         <div>
             {error ? (
@@ -17,11 +17,9 @@ const ProductsList = (props) => {
                     <ul className={classes.list}>
                         {products ? (
                             products.map((product) => (
-                                <li
-                                    key={product._id}
-                                    className={classes.item}
-                                >
+                                <li key={product._id} className={classes.item}>
                                     <ProductDetails
+                                        product={product}
                                         id={product._id}
                                         image={product.image}
                                         title={product.name}

@@ -1,17 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    products: [],
-    filteredProducts: [],
-    product: null,
-    loading: false,
-    error: null,
-};
+// const initialState = {
+//     products: [],
+//     filteredProducts: [],
+//     product: null,
+//     loading: false,
+//     error: null,
+// };
 
 const productsSlice = createSlice({
     name: "products",
-    initialState,
+    initialState: {
+        products: [],
+        filteredProducts: [],
+        product: null,
+        loading: false,
+        error: null,
+    },
     reducers: {
+        setDecrementProductQuantity(state, action) {
+            console.log(action.payload);
+            const { id } = action.payload;
+            const existingItem = state.products.find((product) => product._id === id);
+            console.log(id);
+            console.log(existingItem);
+            if (existingItem) {
+                if (existingItem.stock > 0) {
+                    existingItem.stock--;
+                } else {
+                    throw Error("Product quantity is 0!!! )");
+                }
+            }
+        },
         setLoading(state, action) {
             state.loading = true;
         },
@@ -79,6 +99,7 @@ export const {
     setDeleteProduct,
     setUpdatedProducts,
     setFilteredProdyctsByCategory,
+    setDecrementProductQuantity,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

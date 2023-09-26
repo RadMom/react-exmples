@@ -4,5 +4,9 @@
     margin-bottom: 5px;
 }
 .user-form {
-    width: 50%;
+    width: 40%;
+}
+
+.user-orders {
+    border-left: 1px solid black;
 }

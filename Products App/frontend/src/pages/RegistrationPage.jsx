@@ -41,16 +41,16 @@ const RegistrationPage = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Confirm password</label>
+                    <label htmlFor="confirm-password">Confirm password</label>
                     <input
                         type="text"
                         placeholder="Confirm password"
-                        id="password"
+                        id="confirm-password"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         value={confirmPassword}
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">Regitration</button>
             </form>
         </div>
     );

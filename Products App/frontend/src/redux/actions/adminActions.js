@@ -116,13 +116,33 @@ export const getAllUsers = () => async (dispatch) => {
 };
 
 //GET SINGLE User
-export const getSingleUser = (id) => async (dispatch) => {};
+export const getSingleUser = (id) => async (dispatch) => {
+    try {
+    } catch (error) {}
+};
 
 //EDIT USER
-export const editUser = () => async (dispatch) => {}; //must check user info and what to pass
+export const editUser = () => async (dispatch) => {
+    try {
+    } catch (error) {}
+}; //must check user info and what to pass
 
 //DELETE User
-export const deleteUser = (id) => async (dispatch) => {};
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+        const response = await axios.delete(baseUrl + "user/" + id, {
+            headers: { authorization: `Bearer ${token}` },
+        });
+
+        if (response.statusText !== "OK") {
+            return response;
+        }
+
+        dispatch(setDeleteProduct(id));
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 //GET ALL Orders
 export const getAllOrders = () => async (dispatch) => {};

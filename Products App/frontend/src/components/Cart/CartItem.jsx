@@ -1,7 +1,11 @@
 import React from "react";
-
+import { setDecrementProductQuantity } from "../../redux/slices/products";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAcrions } from "../../redux/slices/cartSlice";
+import {
+    addItemToCart,
+    subtractItemFromCart,
+    removeItemFromCart,
+} from "../../redux/slices/cartSlice";
 
 import classes from "./CartItem.module.css";
 
@@ -10,16 +14,16 @@ const CartItem = (props) => {
     const cart = useSelector((state) => state.cart);
 
     const subtractItemHandler = (id) => {
-        dispatch(cartAcrions.subtractItemFromCart(id));
+        dispatch(subtractItemFromCart(id));
     };
 
     const addItemHandler = (item) => {
-        dispatch(cartAcrions.addItemToCart(item));
+        dispatch(addItemToCart(item));
     };
 
-    const removeItemHandler=(id)=>{
-        dispatch(cartAcrions.removeItemFromCart(id))
-    }
+    const removeItemHandler = (id) => {
+        dispatch(removeItemFromCart(id));
+    };
     return (
         <div className={classes.cartItem}>
             <div>
@@ -33,7 +37,7 @@ const CartItem = (props) => {
                 <p>Quantity: {props.item.quantity}</p>
                 <button onClick={() => addItemHandler(props.item)}>+</button>
             </div>
-           <button onClick={() => removeItemHandler(props.item.id)}>Remove from cart</button>
+            <button onClick={() => removeItemHandler(props.item.id)}>Remove from cart</button>
         </div>
     );
 };

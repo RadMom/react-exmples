@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setDecrementProductQuantity } from "./products";
 
 const cartSlice = createSlice({
     name: "cart",
@@ -67,6 +68,12 @@ const cartSlice = createSlice({
     },
 });
 
-export const cartAcrions = cartSlice.actions;
+export const addItemToCartAndReduceQuantity = (newItem) => (dispatch) => {
+    dispatch(addItemToCart(newItem));
+    dispatch(setDecrementProductQuantity(newItem));
+};
+
+export const { addItemToCart, removeItemFromCart, subtractItemFromCart, replaceCartData } =
+    cartSlice.actions;
 
 export default cartSlice.reducer;

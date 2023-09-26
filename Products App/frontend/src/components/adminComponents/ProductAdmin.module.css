@@ -2,14 +2,20 @@
     border: 1px solid black;
 }
 .product-form {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px 0 5px;
+    border: 1px solid black;
 }
-.descriptions {
-    overflow: auto;
-    max-height: fit-content;
-    width: 30%;
+
+/* button */
+.button {
+    cursor: pointer;
+    font-weight: bold;
 }
-.image {
-    height: 150px;
-    width: 200px;
-    object-fit: cover;
+
+.button:hover {
+    font-size: 1.2em;
+    background-color: var(--clr-neutral-700);
 }

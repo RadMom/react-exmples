@@ -42,12 +42,11 @@ const ProductForm = () => {
                     value={productName}
                     required
                 />
+
+                <br />
                 <label htmlFor="image">Image :</label>
-                <input
-                    type="file"
-                    id="image"
-                    onChange={(e) => setProductImage(e.target.value)}
-                />
+                <input type="file" id="image" onChange={(e) => setProductImage(e.target.value)} />
+                <br />
                 <label htmlFor="category">Product Category</label>
                 <input
                     type="text"
@@ -56,6 +55,7 @@ const ProductForm = () => {
                     onChange={(e) => setProductCategory(e.target.value)}
                     value={productCategory}
                 />
+                <br />
                 <label htmlFor="description">Product Description</label>
                 <input
                     type="text"
@@ -64,6 +64,7 @@ const ProductForm = () => {
                     onChange={(e) => setProductDescription(e.target.value)}
                     value={productDescription}
                 />
+                <br />
                 <label htmlFor="price">Product Price</label>
                 <input
                     type="number"
@@ -72,6 +73,7 @@ const ProductForm = () => {
                     onChange={(e) => setProductPrice(e.target.value)}
                     value={productPrice}
                 />
+                <br />
                 <label htmlFor="stock">Product Stock</label>
                 <input
                     type="number"
@@ -80,7 +82,7 @@ const ProductForm = () => {
                     onChange={(e) => setProductStock(e.target.value)}
                     value={productStock}
                 />
-
+                <br />
                 <button type="submit">Create Product</button>
             </form>
         </div>

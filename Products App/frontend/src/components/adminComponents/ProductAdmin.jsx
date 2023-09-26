@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { createProduct, deleteProduct, editProduct } from "../../redux/actions/adminActions";
 
-import classes from "./ProductsAdmin.module.css";
+import classes from "./ProductAdmin.module.css";
 
 const ProductAdmin = (props) => {
     const {
@@ -35,22 +35,27 @@ const ProductAdmin = (props) => {
 
     const deleteProductHandler = (e) => {
         e.preventDefault();
-        dispatch(deleteProduct(_id));
+        if (window.confirm(`Are you sure that you want to DELETE ${name} ?`)) {
+            dispatch(deleteProduct(_id));
+        }
     };
 
     const updateProductHandler = async (e) => {
         e.preventDefault();
-        dispatch(
-            editProduct(
-                productName,
-                productImage,
-                productCategory,
-                productDescription,
-                productPrice,
-                productStock,
-                _id
-            )
-        );
+        if (window.confirm(`Are you sure that you want to UPDATE ${name} ?`)) {
+            dispatch(
+                editProduct(
+                    productName,
+                    productImage,
+                    productCategory,
+                    productDescription,
+                    productPrice,
+                    productStock,
+                    _id
+                )
+            );
+        }
+
         // navigate("/admin/products");
     };
 
@@ -109,8 +114,12 @@ const ProductAdmin = (props) => {
                     value={productStock}
                     required
                 />
-                <button onClick={updateProductHandler}>Update Product </button>
-                <button onClick={deleteProductHandler}>Delete</button>
+                <button className={classes.button} onClick={updateProductHandler}>
+                    Update Product{" "}
+                </button>
+                <button className={classes.button} onClick={deleteProductHandler}>
+                    Delete
+                </button>
             </form>
         </div>
     );

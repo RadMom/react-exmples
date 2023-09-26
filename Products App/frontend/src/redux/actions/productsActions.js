@@ -11,7 +11,7 @@ export const getProducts = () => async (dispatch) => {
     try {
         const { data } = await axios.get(urlBase + "products");
         dispatch(setProducts(data));
-        dispatch(setLoading(false))
+        dispatch(setLoading(false));
     } catch (error) {
         dispatch(
             setError(
@@ -23,7 +23,6 @@ export const getProducts = () => async (dispatch) => {
             )
         );
     }
-    
 };
 
 //GET SINGLE Product
