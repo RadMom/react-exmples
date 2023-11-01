@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { setLoading, setProducts, setProduct, setError } from "../slices/products";
+import { setLoading, setProducts, setError } from "../slices/products";
 
 const urlBase = "http://localhost:5000/";
 
@@ -11,8 +11,8 @@ export const getProducts = () => async (dispatch) => {
     try {
         const { data } = await axios.get(urlBase + "products");
         dispatch(setProducts(data));
-        dispatch(setLoading(false));
     } catch (error) {
+        console.log(error);
         dispatch(
             setError(
                 error.response && error.response.data.message

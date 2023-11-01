@@ -8,7 +8,6 @@ import { setLogout } from "./redux/authSlice";
 
 //layouts
 import RootLayout from "./layouts/RootLayout";
-import ProductsLayout from "./layouts/ProductsLayout";
 
 //pages
 // const HomePage = lazy(() => import("./pages/HomePage"));
@@ -61,7 +60,6 @@ function App() {
                 { path: "login", element: <LoginPage /> },
                 {
                     path: "products",
-                    element: <ProductsLayout />,
                     children: [
                         { index: true, element: <ProductsPage /> },
                         { path: ":productId", element: <ProductDetailsPage /> },

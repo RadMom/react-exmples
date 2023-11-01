@@ -13,7 +13,6 @@ const productsSlice = createSlice({
     initialState: {
         products: [],
         filteredProducts: [],
-        product: null,
         loading: false,
         error: null,
     },
@@ -23,17 +22,17 @@ const productsSlice = createSlice({
             const { id } = action.payload;
             const existingItem = state.products.find((product) => product._id === id);
             console.log(id);
-            console.log(existingItem);
+            console.log(existingItem.stock);
             if (existingItem) {
                 if (existingItem.stock > 0) {
                     existingItem.stock--;
                 } else {
-                    throw Error("Product quantity is 0!!! )");
+                    throw new Error("Product quantity is 0!!! )");
                 }
             }
         },
         setLoading(state, action) {
-            state.loading = true;
+            state.loading = action.payload;
         },
         setProducts(state, action) {
             state.products = action.payload;
@@ -41,12 +40,7 @@ const productsSlice = createSlice({
             state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(action.payload)));
         },
-        setProduct(state, action) {
-            state.product = action.payload;
-            state.loading = false;
-            state.error = null;
-            JSON.stringify(localStorage.setItem("product", action.payload));
-        },
+
         setError(state, action) {
             state.error = action.payload;
             state.loading = false;
@@ -72,6 +66,7 @@ const productsSlice = createSlice({
             }
         },
         setFilteredProdyctsByCategory(state, action) {
+            console.log(action.payload);
             const category = action.payload;
             if (category === "All") {
                 state.filteredProducts = [];

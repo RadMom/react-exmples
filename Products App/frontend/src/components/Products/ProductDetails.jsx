@@ -24,8 +24,15 @@ const ProductDetails = (props) => {
                 <h3>{title}</h3>
                 <img className={classes.image} src={donkey} />
             </header>
-            <p className={classes.limit}>{description}</p>
-            <div className={classes.price}>${price}</div>
+            <div className={classes.description}>
+                <p>{description}</p>
+            </div>
+
+            <div className={classes["price-and-stock"]}>
+                <p className={classes.price}>${price}</p>
+                <p className={classes.stock}>Stock: {props.product.stock}</p>
+            </div>
+
             <div className={classes.actions}>
                 <button onClick={addToCartHandler}>Add to Cart</button>
             </div>

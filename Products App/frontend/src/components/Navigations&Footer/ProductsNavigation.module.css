@@ -1,14 +1,13 @@
-
-.productsNav{
+.products-nav {
     display: flex;
-    flex-direction: column;
+
     height: 100%;
-    width: 200px;
+
     border: 2px solid black;
     margin: 5px;
     padding: 10px;
 }
-.productsNav li{
+.productsNav li {
     margin: 10px;
     padding: 5px;
 }
