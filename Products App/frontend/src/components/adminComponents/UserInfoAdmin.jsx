@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./UserInfoAdmin.module.css";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../../redux/actions/adminActions";
+import { deleteUser } from "../../redux/admin/adminActions";
 
 function UserInfoAdmin(props) {
     const dispatch = useDispatch();

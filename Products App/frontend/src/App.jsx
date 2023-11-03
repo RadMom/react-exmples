@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
 
-import { setLogout } from "./redux/authSlice";
+import { setLogout } from "./redux/auth/authSlice";
 
 //layouts
 import RootLayout from "./layouts/RootLayout";

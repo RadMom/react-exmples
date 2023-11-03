@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { createProduct, deleteProduct, editProduct } from "../../redux/actions/adminActions";
+import { createProduct, deleteProduct, editProduct } from "../../redux/admin/adminActions";
 
 import classes from "./ProductAdmin.module.css";
 

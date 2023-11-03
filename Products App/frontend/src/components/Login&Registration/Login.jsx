@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setError, setLogin } from "../../redux/authSlice";
+import { setError, setLogin } from "../../redux/auth/authSlice";
 import axios from "axios";
 import classes from "./Login.module.css";
 import Card from "../../UI/Card";

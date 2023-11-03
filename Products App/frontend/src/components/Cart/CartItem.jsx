@@ -1,11 +1,11 @@
 import React from "react";
-import { setDecrementProductQuantity } from "../../redux/slices/products";
+import { setDecrementProductQuantity } from "../../redux/products/products";
 import { useDispatch, useSelector } from "react-redux";
 import {
     addItemToCart,
     subtractItemFromCart,
     removeItemFromCart,
-} from "../../redux/slices/cartSlice";
+} from "../../redux/cart/cartSlice";
 
 import classes from "./CartItem.module.css";
 import donkey from "../../assets/donkey.jpg";

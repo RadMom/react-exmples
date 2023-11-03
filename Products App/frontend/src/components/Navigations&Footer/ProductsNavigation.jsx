@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilteredProdyctsByCategory } from "../../redux/slices/products";
+import { setFilteredProdyctsByCategory } from "../../redux/products/products";
 
 const categories = ["All", "test1", "test2", "test3", "test4"];
 
@@ -13,6 +13,7 @@ const ProductsNavigation = () => {
 
     const filterHandler = (category) => {
         dispatch(setFilteredProdyctsByCategory(selectedCategory));
+        setSelectedCategory((old) => selectedCategory);
     };
 
     return (
@@ -34,7 +35,7 @@ const ProductsNavigation = () => {
                 <p>Products per page</p>
                 <select
                     value={selectedItemsPerPage}
-                    onChange={(e) => itemsPerPageHandler(e.target.value)}
+                    onChange={(e) => setSelectedItemsPerPage(e.target.value)}
                 >
                     <option value={5}>5 per page</option>
                     <option value={10}>10 per page</option>

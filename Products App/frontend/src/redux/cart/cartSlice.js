@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setDecrementProductQuantity } from "./products";
+import { setDecrementProductQuantity } from "../products/products";
 
 const cartSlice = createSlice({
     name: "cart",

@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { deleteProduct } from "../../redux/actions/adminActions";
-import { addItemToCartAndReduceQuantity } from "../../redux/slices/cartSlice";
+import { deleteProduct } from "../../redux/admin/adminActions";
+import { addItemToCartAndReduceQuantity } from "../../redux/cart/cartSlice";
 
 import Card from "../../UI/Card";
 import classes from "./ProductDetails.module.css";

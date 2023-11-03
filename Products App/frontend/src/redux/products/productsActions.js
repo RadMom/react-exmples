@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { setLoading, setProducts, setError } from "../slices/products";
+import { setLoading, setProducts, setError } from "./products";
 
 const urlBase = "http://localhost:5000/";
 

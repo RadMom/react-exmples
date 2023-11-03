@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import ProductAdmin from "./ProductAdmin";
 
-import { getProducts } from "../../redux/actions/productsActions";
-import { deleteProduct } from "../../redux/actions/adminActions";
+import { getProducts } from "../../redux/products/productsActions";
+import { deleteProduct } from "../../redux/admin/adminActions";
 
 import classes from "./ProductsAdmin.module.css";
 import donkey from "../../assets/donkey.jpg";

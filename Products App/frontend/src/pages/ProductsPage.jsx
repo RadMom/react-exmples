@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductsNavigation from "../components/Navigations&Footer/ProductsNavigation";
-import { getProducts } from "../redux/actions/productsActions";
+import { getProducts } from "../redux/products/productsActions";
 
 import ProductsList from "../components/Products/ProductsList";
 

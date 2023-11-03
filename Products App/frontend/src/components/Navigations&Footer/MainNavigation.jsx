@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsCart2 } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 
-import { setLogout } from "../../redux/authSlice";
+import { setLogout } from "../../redux/auth/authSlice";
 
 import classes from "./MainNavigation.module.css";
 import AdminNav from "./AdminNav";

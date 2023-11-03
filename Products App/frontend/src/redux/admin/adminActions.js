@@ -1,14 +1,15 @@
 import axios from "axios";
-import { setUpdatedProducts, setDeleteProduct } from "../slices/products";
-import { setUsers } from "../slices/adminSlice";
+import { setUpdatedProducts, setDeleteProduct } from "../products/products";
+import { setUsers } from "./adminSlice";
+import store from "../index";
 
 const baseUrl = "http://localhost:5000/";
-const getToken = JSON.parse(localStorage.getItem("userInfo")) || undefined;
-let token = "";
-if (getToken) {
-    token = getToken.token;
-}
-console.log(token);
+// const token = JSON.parse(localStorage.getItem("userInfo"))?.token || undefined;
+// let token = "";
+// if (getToken) {
+//     token = getToken.token;
+// }
+
 export const createProduct =
     (productName, productImage, productCategory, productDescription, productPrice, productStock) =>
     async (dispatch) => {
@@ -103,7 +104,11 @@ export const editProduct =
     };
 
 //GET ALL Users
-export const getAllUsers = () => async (dispatch) => {
+export const getAllUsers = () => async (dispatch, getState) => {
+    const token = getState().auth.userInfo.token;
+    console.log(token);
+    // const state = store.getState();
+    // const token = state.auth.userInfo?.token || undefined;
     try {
         const { data } = await axios.get(baseUrl + "user", {
             headers: { authorization: `Bearer ${token}` },

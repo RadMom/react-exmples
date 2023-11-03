@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { createProduct } from "../../redux/actions/adminActions";
+import { createProduct } from "../../redux/admin/adminActions";
 
 const ProductForm = () => {
     const [productName, setProductName] = useState("");
