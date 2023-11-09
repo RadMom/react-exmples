@@ -1,31 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { setDecrementProductQuantity } from "../products/products";
+import { createSlice, current } from "@reduxjs/toolkit";
+import { setDecrementProductQuantity } from "../products/productsSlice";
+
+// const item = {
+//     id,
+//     name,
+//     price,
+//     quantity,
+//     totalPriceForItem,
+// };
 
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        items: [],
+        products: [],
         totalQuantity: 0,
         totalPrice: 0,
+        isLoading: false,
+        error: null,
         changed: false,
     },
     reducers: {
         //Need this reducer for fetchingData in App.jsx
         replaceCartData(state, action) {
-            //If we haven't items when fetching data it will save it as undefined that's why we need ||[]
-            state.items = action.payload.items || [];
+            //If we haven't products when fetching data it will save it as undefined that's why we need ||[]
+            state.products = action.payload.products || [];
             state.totalQuantity = action.payload.totalQuantity || 0;
             state.totalPrice = action.payload.totalPrice || 0;
         },
-        addItemToCart(state, action) {
+        addProductToCart(state, action) {
+            state.isLoading = true;
             const newItem = action.payload;
-            const existingItem = state.items.find((item) => item.id === newItem.id);
+            const existingItem = state.products.find((item) => item.id === newItem.id);
 
             //We can add only 1 item!!!
             state.totalQuantity++;
             state.changed = true; //Must change this to true - if (cart.changed) then sendCartData in App.jsx
             if (!existingItem) {
-                state.items.push({
+                state.products.push({
                     id: newItem.id,
                     name: newItem.title,
                     price: Number(newItem.price),
@@ -39,15 +50,16 @@ const cartSlice = createSlice({
                     existingItem.totalPriceForItem + Number(newItem.price);
                 state.totalPrice += Number(newItem.price);
             }
+            console.log(current(state.products));
         },
-        subtractItemFromCart(state, action) {
+        subtractProductFromCart(state, action) {
             const id = action.payload;
-            const existingItem = state.items.find((item) => item.id === id);
+            const existingItem = state.products.find((item) => item.id === id);
             state.totalQuantity--;
 
             state.changed = true; //Must change this to true - if (cart.changed) then sendCartData in App.jsx
             if (existingItem.quantity === 1) {
-                state.items = state.items.filter((item) => item.id !== id); //return an array with items with !==ids
+                state.products = state.products.filter((item) => item.id !== id); //return an array with products with !==ids
                 state.totalPrice -= existingItem.price;
             } else {
                 existingItem.quantity--;
@@ -56,11 +68,11 @@ const cartSlice = createSlice({
                 state.totalPrice -= existingItem.price;
             }
         },
-        removeItemFromCart(state, action) {
+        removeProductFromCart(state, action) {
             const id = action.payload;
-            const existingItem = state.items.find((item) => item.id === id);
+            const existingItem = state.products.find((item) => item.id === id);
             if (existingItem) {
-                state.items = state.items.filter((item) => item.id !== id);
+                state.products = state.products.filter((item) => item.id !== id);
                 state.totalPrice -= existingItem.price * existingItem.quantity;
                 state.totalQuantity -= existingItem.quantity;
             }
@@ -73,7 +85,7 @@ export const addItemToCartAndReduceQuantity = (newItem) => (dispatch) => {
     dispatch(setDecrementProductQuantity(newItem));
 };
 
-export const { addItemToCart, removeItemFromCart, subtractItemFromCart, replaceCartData } =
+export const { addProductToCart, removeProductFromCart, subtractProductFromCart, replaceCartData } =
     cartSlice.actions;
 
 export default cartSlice.reducer;

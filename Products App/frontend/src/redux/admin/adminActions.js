@@ -1,10 +1,10 @@
 import axios from "axios";
-import { setUpdatedProducts, setDeleteProduct } from "../products/products";
+import { setUpdatedProducts, setDeleteProduct } from "../products/productsSlice";
 import { setUsers } from "./adminSlice";
 import store from "../index";
 
 const baseUrl = "http://localhost:5000/";
-// const token = JSON.parse(localStorage.getItem("userInfo"))?.token || undefined;
+const token = JSON.parse(localStorage.getItem("userInfo"))?.token || undefined;
 // let token = "";
 // if (getToken) {
 //     token = getToken.token;
@@ -36,7 +36,7 @@ export const createProduct =
             //     navigate("/");
             // }
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response);
         }
     };
 
@@ -150,7 +150,9 @@ export const deleteUser = (id) => async (dispatch) => {
 };
 
 //GET ALL Orders
-export const getAllOrders = () => async (dispatch) => {};
+export const getAllOrders = () => async (dispatch) => {
+    const response = await axios.get(baseUrl + "orders/admin/orders");
+};
 
 //GET USER Orders
 export const getUserOrders = (id) => async (dispatch) => {};

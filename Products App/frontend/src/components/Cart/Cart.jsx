@@ -1,23 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import CartItem from "./CartItem";
+import { createOrder } from "../../redux/orders/orderActions";
+import CartItem from "./CartProduct";
 import classes from "./Cart.module.css";
 
 const Cart = () => {
+    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
-
+    console.log(typeof cart.products);
     //Must finish order action
-    const orderHandler = () => {};
+    const orderHandler = () => {
+        dispatch(createOrder(cart.products));
+    };
     return (
         <div>
-            {cart.items.length > 0 ? (
+            {cart.products.length > 0 ? (
                 <div className={classes.cart}>
                     <div>
                         <ul className={classes.cartItems}>
-                            {cart.items.map((item) => (
-                                <li key={item.id}>
-                                    <CartItem item={item} />
+                            {cart.products.map((product) => (
+                                <li key={product.id}>
+                                    <CartItem product={product} />
                                 </li>
                             ))}
                         </ul>

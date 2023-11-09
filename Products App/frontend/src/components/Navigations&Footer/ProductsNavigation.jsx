@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilteredProdyctsByCategory } from "../../redux/products/products";
+import { setFilteredProdyctsByCategory } from "../../redux/products/productsSlice";
 
 const categories = ["All", "test1", "test2", "test3", "test4"];
 

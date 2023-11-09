@@ -15,7 +15,7 @@ const protectRoute = async (req, res, next) => {
     try {
         const { _id } = jwt.verify(token, process.env.JWT_SECRET);
 
-        req.user = await User.findById({_id});
+        req.user = await User.findById({ _id });
         console.log(`ProtectRoute -USER : ${req.user}`);
         next();
     } catch (error) {
@@ -25,7 +25,7 @@ const protectRoute = async (req, res, next) => {
 };
 
 const admin = async (req, res, next) => {
-    if (req.user && req.user.isAdmin !== false) {
+    if (req.user && req.user.isAdmin === true) {
         console.log(`ProtectRoute - ADMIN: ${req.user}`);
         next();
     } else {

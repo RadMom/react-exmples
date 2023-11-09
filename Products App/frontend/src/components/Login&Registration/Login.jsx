@@ -67,65 +67,61 @@ const Login = () => {
         }
     };
     return (
-        <div className={classes["form-container"]}>
-            <div className={classes.login}>
-                <div>
-                    {unexpectedError && unexpectedError}
-                    {/* {error !== "Invalid email..." && error !== "Invalid password..." ? (
+        // <div className={classes["form-container"]}>
+        <div className={classes.login}>
+            <div>
+                {unexpectedError && unexpectedError}
+                {/* {error !== "Invalid email..." && error !== "Invalid password..." ? (
                         <div>{error}</div>
                     ) : (
                         ""
                     )} */}
+            </div>
+
+            <h2>Welcome</h2>
+
+            <form onSubmit={formSubmitHandler} autoComplete="on" className={classes["login-form"]}>
+                <div
+                    className={
+                        emailError
+                            ? `${classes["input-group"]} ${classes.error}`
+                            : classes["input-group"]
+                    }
+                >
+                    <label htmlFor="email">Enter email</label>
+                    <input
+                        id="email"
+                        type="text"
+                        placeholder="Enter email"
+                        ref={emailInputRef}
+                        required
+                    />
+                    <span className={classes.msg}>Invalid email</span>
+                </div>
+                <div
+                    className={
+                        passwordError
+                            ? `${classes["input-group"]} ${classes.error}`
+                            : classes["input-group"]
+                    }
+                >
+                    <label htmlFor="password">Enter password</label>
+                    <input
+                        id="password"
+                        type="text"
+                        placeholder="Enter password"
+                        ref={passwordInputRef}
+                        required
+                    />
+                    <span className={classes.msg}>Invalid password</span>
                 </div>
 
-                <h2>Welcome</h2>
-
-                <form
-                    onSubmit={formSubmitHandler}
-                    autoComplete="on"
-                    className={classes["login-form"]}
-                >
-                    <div
-                        className={
-                            emailError
-                                ? `${classes["input-group"]} ${classes.error}`
-                                : classes["input-group"]
-                        }
-                    >
-                        <label htmlFor="email">Enter email</label>
-                        <input
-                            id="email"
-                            type="text"
-                            placeholder="Enter email"
-                            ref={emailInputRef}
-                            required
-                        />
-                        <span className={classes.msg}>Invalid email</span>
-                    </div>
-                    <div
-                        className={
-                            passwordError
-                                ? `${classes["input-group"]} ${classes.error}`
-                                : classes["input-group"]
-                        }
-                    >
-                        <label htmlFor="password">Enter password</label>
-                        <input
-                            id="password"
-                            type="text"
-                            placeholder="Enter password"
-                            ref={passwordInputRef}
-                            required
-                        />
-                        <span className={classes.msg}>Invalid password</span>
-                    </div>
-
-                    <button type="submit" className={classes["login-button"]}>
-                        Login
-                    </button>
-                </form>
-            </div>
+                <button type="submit" className={classes["login-button"]}>
+                    Login
+                </button>
+            </form>
         </div>
+        // </div>
     );
 };
 

@@ -10,11 +10,15 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
     const { products, filteredProducts, loading, error } = useSelector((state) => state.products);
 
-    // const products = data.filteredProducts.length > 0 ? data.filteredProducts : data.products;
-
+    // console.log(typeof products);
+    // console.log(typeof filteredProducts);
     useEffect(() => {
-        dispatch(getProducts());
-    }, []);
+        console.log(products.length);
+        if (products.length <= 0) {
+            dispatch(getProducts());
+            console.log("fetched");
+        }
+    }, [dispatch]);
 
     return (
         <>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     users: [],
-    loading: false,
+    isLoading: false,
     error: null,
 };
 
@@ -11,15 +11,15 @@ const adminSlice = createSlice({
     initialState,
     reducers: {
         setLoading(state, action) {
-            state.loading = true;
+            state.isLoading = action.payload;
         },
         setError(state, action) {
             state.error = action.payload;
-            state.loading = false;
+            state.isLoading = false;
         },
         setUsers(state, action) {
             state.users = action.payload.users;
-            state.loading = false;
+            state.isLoading = false;
             state.error = null;
         },
     },

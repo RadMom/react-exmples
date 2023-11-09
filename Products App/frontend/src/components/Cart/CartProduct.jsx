@@ -1,67 +1,67 @@
 import React from "react";
-import { setDecrementProductQuantity } from "../../redux/products/products";
+import { setDecrementProductQuantity } from "../../redux/products/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    addItemToCart,
-    subtractItemFromCart,
-    removeItemFromCart,
+    addProductToCart,
+    subtractProductFromCart,
+    removeProductFromCart,
 } from "../../redux/cart/cartSlice";
 
-import classes from "./CartItem.module.css";
+import classes from "./Cartproduct.module.css";
 import donkey from "../../assets/donkey.jpg";
 
-const CartItem = (props) => {
+const CartProduct = (props) => {
     console.log(props);
     const productStock = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
-    const subtractItemHandler = (id) => {
-        dispatch(subtractItemFromCart(id));
+    const subtractProductHandler = (id) => {
+        dispatch(subtractProductFromCart(id));
     };
 
-    const addItemHandler = (item) => {
-        dispatch(addItemToCart(item));
+    const addProductHandler = (product) => {
+        dispatch(addProductToCart(product));
     };
 
-    const removeItemHandler = (id) => {
-        dispatch(removeItemFromCart(id));
+    const removeproductHandler = (id) => {
+        dispatch(removeProductFromCart(id));
     };
     return (
-        <div className={classes.cartItem}>
+        <div className={classes.cartproduct}>
             <div className={classes["product-info"]}>
                 <div className={classes.image}>
                     <img src={donkey} />
                 </div>
                 <div className={classes.actions}>
-                    <p>Name : {props.item.name}</p>
+                    <p>Name : {props.product.name}</p>
 
                     <div className={classes.buttons}>
                         <button
                             className={classes["btn-decrement"]}
-                            // disabled={(props.item.stock = 0)}
-                            onClick={() => subtractItemHandler(props.item.id)}
+                            // disabled={(props.product.stock = 0)}
+                            onClick={() => subtractProductHandler(props.product.id)}
                         >
                             -
                         </button>
-                        {/* <p>{props.item.stock}</p> */}
+                        <p>{props.product.quantity}</p>
                         <button
                             className={classes["btn-increment"]}
-                            onClick={() => addItemHandler(props.item)}
+                            onClick={() => addProductHandler(props.product)}
                         >
                             +
                         </button>
                     </div>
-                    <button onClick={() => removeItemHandler(props.item.id)}>Remove</button>
+                    <button onClick={() => removeproductHandler(props.product.id)}>Remove</button>
                 </div>
 
                 <div className={classes.price}>
-                    <p>Price: {props.item.price}</p>
-                    <p>Total price for item: {props.item.totalPriceForItem}</p>
+                    <p>Price: {props.product.price}</p>
+                    <p>Total price for product: {props.product.totalPriceForItem}</p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default CartItem;
+export default CartProduct;

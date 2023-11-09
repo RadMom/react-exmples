@@ -1,12 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-// const initialState = {
-//     products: [],
-//     filteredProducts: [],
-//     product: null,
-//     loading: false,
-//     error: null,
-// };
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const productsSlice = createSlice({
     name: "products",
@@ -17,20 +9,6 @@ const productsSlice = createSlice({
         error: null,
     },
     reducers: {
-        setDecrementProductQuantity(state, action) {
-            console.log(action.payload);
-            const { id } = action.payload;
-            const existingItem = state.products.find((product) => product._id === id);
-            console.log(id);
-            console.log(existingItem.stock);
-            if (existingItem) {
-                if (existingItem.stock > 0) {
-                    existingItem.stock--;
-                } else {
-                    throw new Error("Product quantity is 0!!! )");
-                }
-            }
-        },
         setLoading(state, action) {
             state.loading = action.payload;
         },
@@ -65,6 +43,21 @@ const productsSlice = createSlice({
                 state.error = "Can not update product...";
             }
         },
+        setDecrementProductQuantity(state, action) {
+            console.log(current(state.products));
+            console.log(action.payload);
+            const id = action.payload.id;
+            console.log(action.payload.id);
+            const existingItem = state.products.find((product) => product._id == id);
+            console.log(existingItem);
+            if (existingItem) {
+                if (existingItem.stock > 0) {
+                    existingItem.stock--;
+                } else {
+                    throw new Error("Product quantity is 0!!! )");
+                }
+            }
+        },
         setFilteredProdyctsByCategory(state, action) {
             console.log(action.payload);
             const category = action.payload;
@@ -84,6 +77,22 @@ const productsSlice = createSlice({
             console.log(state.filteredProducts);
         },
     },
+    // extraReducers: (builder) =>
+    //     builder.addCase(addItemToCart, (state, action) => {
+    //         const id = action.payload.id;
+
+    //         // Find the product in the cart and decrement its stock if necessary
+    //         const existingItem = state.products.find((item) => item.id === id);
+
+    //         if (existingItem) {
+    //             // Check the product stock and decrement if available
+    //             const existingProduct = products.find((product) => product._id === id);
+
+    //             if (existingProduct && existingProduct.stock > 0) {
+    //                 existingProduct.stock--;
+    //             }
+    //         }
+    //     }),
 });
 
 export const {
