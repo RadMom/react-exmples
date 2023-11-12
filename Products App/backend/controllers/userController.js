@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
 
         res.json({
             _id: user._id,
-            name: user.name,
+            username: user.username,
             email: user.email,
             idAdmin: user.isAdmin,
             token,
@@ -33,14 +33,14 @@ const loginUser = async (req, res) => {
 
 //register controller
 const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
-        const user = await User.signup(name, email, password);
+        const user = await User.signup(username, email, password);
         const token = createToken(user._id);
         res.json({
             _id: user._id,
-            name: user.name,
+            username: user.username,
             email: user.email,
             idAdmin: user.isAdmin,
             token,
@@ -55,7 +55,7 @@ const updateUserProfile = async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (user) {
-        user.name = req.body.name || user.name;
+        user.username = req.body.username || user.username;
         user.email = req.body.email || user.email;
         if (req.body.password) {
             user.password = req.body.password;

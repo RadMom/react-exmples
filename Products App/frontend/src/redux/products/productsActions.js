@@ -5,12 +5,21 @@ import { setLoading, setProducts, setError } from "./productsSlice";
 const urlBase = "http://localhost:5000/";
 
 //GET ALL Products
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (filters) => async (dispatch) => {
     dispatch(setLoading(true));
-
+    console.log(filters?.itemsPerPage);
     try {
-        const { data } = await axios.get(urlBase + "products");
-        dispatch(setProducts(data));
+        const { data } = await axios.get(urlBase + "products", {
+            params: {
+                page: filters?.page || 1,
+                limit: filters?.itemsPerPage || 10,
+                category: filters?.category || "",
+                sortBy: filters?.sortBy || "",
+                search: filters?.search || "",
+            },
+        });
+        console.log(data);
+        dispatch(setProducts(data.products));
     } catch (error) {
         console.log(error);
         dispatch(

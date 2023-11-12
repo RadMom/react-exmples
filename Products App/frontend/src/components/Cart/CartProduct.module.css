@@ -1,57 +1,76 @@
-.cartItem {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
-    padding: 5px;
-    margin: 5px;
-}
+/* Cartproduct.module.css */
 
-.product-info {
-    display: flex;
+.cartproduct {
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
 }
-.image {
-    width: 150px;
-    object-fit: cover;
+
+.cartproduct th,
+.cartproduct td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
 }
-.actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+
+.cartproduct th {
+    background-color: #f2f2f2;
+}
+
+.cartproduct .image {
+    width: 10%;
+    background-size: cover;
+}
+
+.cartproduct .image img {
+    width: 100%;
+    height: 100%;
+}
+
+.cartproduct .name {
     width: 20%;
-    margin-left: 20px;
 }
 
-.buttons {
+.cartproduct .quantity {
+    width: 15%;
+}
+
+.cartproduct .price {
+    width: 20%;
+}
+
+.cartproduct .actions {
+    width: 20%;
+}
+
+.cartproduct .buttons {
     display: flex;
-    justify-content: space-between;
-}
-
-.btn-decrement {
-    background-color: red;
-}
-
-.btn-increment {
-    background-color: green;
-}
-
-.buttons button {
-    display: flex;
-    padding: 0px;
-    margin: 0;
-    height: 2rem;
-    width: 2rem;
     align-items: center;
-    justify-content: center;
-}
-.buttons p {
-    height: 2rem;
-    width: 2rem;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid black;
 }
 
-.price {
-    margin-left: auto;
+.cartproduct .btn-decrement,
+.cartproduct .btn-increment,
+.cartproduct button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+}
+
+.cartproduct .btn-decrement:hover,
+.cartproduct .btn-increment:hover,
+.cartproduct button:hover {
+    background-color: #45a049;
+}
+
+.cartproduct button {
+    background-color: #d9534f;
+}
+
+.cartproduct button:hover {
+    background-color: #c9302c;
 }

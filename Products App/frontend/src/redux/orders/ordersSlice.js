@@ -12,12 +12,15 @@ const orderSlice = createSlice({
     reducers: {
         setOrder(state, action) {
             state.orders.push(action.payload);
-            (state.isLoading = false), (state.error = null);
+            state.isLoading = false;
+            state.error = null;
         },
         setError(state, action) {
-            (state.isLoading = false), (state.error = action.payload);
+            state.isLoading = false;
+            state.error = action.payload;
         },
         setIsLOading(state, action) {
+            state.error = null;
             state.isLoading = action.payload;
         },
     },

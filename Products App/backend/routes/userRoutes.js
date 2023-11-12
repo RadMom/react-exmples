@@ -16,7 +16,7 @@ const {
 
 //routes
 userRoutes.post("/login", loginUser);
-userRoutes.post("/register", registerUser);
+userRoutes.post("/registration", registerUser);
 //protectedRoutes
 userRoutes.get("/:id", protectRoute, getUserOrders);
 userRoutes.put("/profile/:id", protectRoute, updateUserProfile);

@@ -2,24 +2,6 @@ const User = require("../models/User");
 const Product = require("../models/Product");
 
 const createOrder = async (req, res) => {
-    //const products=req.body
-    //check every product quantity <=available quantity
-    //calculate product total price=product.quantity*product.price
-    //add product total price to TOTAL PRICE
-    //     res.order = {
-    //         products: [
-    //             {
-    //                 name: product.name,
-    //                 quantity: product.quantity,
-    //                 price: product.price,
-    //                 productTotalPrice: productTotalPrice,
-    //             },
-    //         ],
-    //         totalPrice: totalPrice,
-    //         orderId: orderId,
-    //         userId: userId,
-    //     };
-
     const { products } = req.body;
 
     //products verification data

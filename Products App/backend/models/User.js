@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //user Schema
 const userSchema = new Schema(
     {
-        name: {
+        username: {
             type: String,
             required: true,
         },
@@ -29,8 +29,8 @@ const userSchema = new Schema(
 
 //static signup method. We use signup function in userControllers.
 // It can be whatever we want- userSchema.statics.pepito but we must use the same name in userController.js
-userSchema.statics.signup = async function (name, email, password) {
-    if (!name || !email || !password) {
+userSchema.statics.signup = async function (username, email, password) {
+    if (!username || !email || !password) {
         throw Error("Please provide name, email and password");
     }
 
@@ -43,7 +43,7 @@ userSchema.statics.signup = async function (name, email, password) {
     //Hash the password and create user
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await this.create({ name, email, password: hashedPassword });
+    const user = await this.create({ username, email, password: hashedPassword });
 
     return user;
 };

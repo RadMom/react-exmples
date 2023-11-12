@@ -33,6 +33,7 @@ import ProductsAdmin from "./components/adminComponents/ProductsAdmin";
 import UsersAdmin from "./components/adminComponents/UsersAdmin";
 import OrdersAdmin from "./components/adminComponents/OrdersAdmin";
 import CreateProduct from "./pages/admin/ProductForm";
+import Order from "./components/Order/Order";
 
 function App() {
     console.log("App.jsx");
@@ -42,6 +43,8 @@ function App() {
         const expirationTime = localStorage.getItem("expirationTime");
         if (expirationTime) {
             const currentTime = new Date().getTime();
+            console.log(currentTime);
+            console.log(expirationTime);
 
             if (currentTime > expirationTime) {
                 dispatch(setLogout());
@@ -65,6 +68,7 @@ function App() {
                         { path: ":productId", element: <ProductDetailsPage /> },
                     ],
                 },
+                { path: "order", element: <Order /> },
                 { path: "about", element: <AboutPage /> },
                 { path: "cart", element: <Cart /> },
                 //admin routes

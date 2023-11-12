@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import classes from "./Login.module.css";
 import Card from "../../UI/Card";
-import { login } from "../../redux/auth/authActions";
+import { registration } from "../../redux/auth/authActions";
 
-const Login = () => {
-    console.log("Login.jsx");
+const Registration = () => {
+    console.log("Registration.jsx");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const error = useSelector((state) => state.auth.error);
@@ -15,7 +15,9 @@ const Login = () => {
     const [unexpectedError, setUnexpectedError] = useState(false);
     const [emailError, setEmailError] = useState();
     const [passwordError, setPasswordError] = useState();
+
     const [enteredValues, setEnteredValues] = useState({
+        username: "",
         email: "",
         password: "",
     });
@@ -30,10 +32,10 @@ const Login = () => {
 
     const formSubmitHandler = async (e) => {
         e.preventDefault();
-
+        const username = enteredValues.username;
         const email = enteredValues.email;
         const password = enteredValues.password;
-        dispatch(login(email, password, navigate));
+        dispatch(registration(username, email, password, navigate));
     };
 
     useEffect(() => {
@@ -49,7 +51,22 @@ const Login = () => {
         <div className={classes.login}>
             <h2>Welcome</h2>
             <div className={classes.error}>{unexpectedError && <p>{error}</p>}</div>
-            <form onSubmit={formSubmitHandler} autoComplete="on" className={classes["login-form"]}>
+            <form
+                onSubmit={formSubmitHandler}
+                autoComplete="on"
+                className={classes["registration-form"]}
+            >
+                <div className={classes["input-group"]}>
+                    <label htmlFor="username">Enter username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="Enter username"
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
                 <div
                     className={
                         emailError
@@ -86,13 +103,31 @@ const Login = () => {
                     />
                     <span className={classes.msg}>Invalid password</span>
                 </div>
+                <div
+                    className={
+                        passwordError
+                            ? `${classes["input-group"]} ${classes.error}`
+                            : classes["input-group"]
+                    }
+                >
+                    <label htmlFor="confirmPassword">Confirm password</label>
+                    <input
+                        id="confirmPassword"
+                        type="text"
+                        name="confirmPassword"
+                        placeholder="Confirm password"
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <span className={classes.msg}>Invalid password</span>
+                </div>
 
-                <button type="submit" className={classes["login-button"]}>
-                    Login
+                <button type="submit" className={classes["registration-button"]}>
+                    Registration
                 </button>
             </form>
         </div>
     );
 };
 
-export default Login;
+export default Registration;

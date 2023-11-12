@@ -1,0 +1,33 @@
+.order-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.products-details {
+    flex: 1;
+    margin-right: 20px;
+}
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.product-table th,
+.product-table td,
+.product-table tr {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+    font-size: 14px;
+    height: auto;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 16px;
+}

@@ -1,8 +1,8 @@
 :root {
-    --clr-neutral-100: rgb(241, 236, 236);
-    --clr-neutral-300: rgba(207, 200, 200, 0.973);
-    --clr-neutral-500: rgba(189, 173, 173, 0.699);
-    --clr-neutral-700: rgba(153, 144, 144, 0.562);
+    --clr-neutral-100: rgb(254, 254, 254);
+    --clr-neutral-300: rgba(253, 253, 253, 0.7);
+    --clr-neutral-500: rgba(253, 253, 253, 0.5);
+    --clr-neutral-700: rgba(153, 144, 144, 0.3);
 
     --clr-error: red;
 

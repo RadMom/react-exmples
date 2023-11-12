@@ -42,7 +42,7 @@ const ProductDetails = (props) => {
             )}
             <Card>
                 <header className={classes.header}>
-                    <h3>{title}</h3>
+                    <h3 data-full-text={title}>{title}</h3>
                     <img className={classes.image} src={donkey} />
                 </header>
                 <div className={classes.description}>

@@ -4,10 +4,38 @@ const Product = require("../models/Product");
 //URL: /products
 const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find({}).sort({ createdAt: -1 });
+        const { page, limit, category, sortBy, search } = req.query;
+        console.log(req.query);
+        let query = {};
+
+        if (category) {
+            query.category = category;
+        }
+
+        let sortOptions;
+        if (sortBy) {
+            if (sortBy === "lowest") {
+                sortOptions = 1;
+            } else {
+                sortOptions = 1;
+            }
+        }
+        console.log(sortOptions);
+        const products = await Product.find(query)
+            .sort({ price: sortOptions })
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        console.log(products.length);
+        // Count total products for pagination
+        const totalProducts = await Product.countDocuments(query);
 
         if (products) {
-            res.json(products);
+            res.json({
+                products,
+                totalPages: Math.ceil(totalProducts / limit),
+                currentPage: parseInt(page),
+            });
         } else {
             res.status(404);
             throw new Error("Products not found.");

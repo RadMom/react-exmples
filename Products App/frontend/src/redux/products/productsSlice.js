@@ -7,6 +7,13 @@ const productsSlice = createSlice({
         filteredProducts: [],
         loading: false,
         error: null,
+        totalPages: 0,
+        currentPage: 1,
+        filters: {
+            category: "",
+            sortBy: "",
+            search: "",
+        },
     },
     reducers: {
         setLoading(state, action) {

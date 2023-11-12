@@ -23,7 +23,7 @@
     width: 70%;
     padding: 10px;
 }
-h2 {
+.login h2 {
     text-align: center;
     color: white;
     padding: 10px;
@@ -36,13 +36,12 @@ h2 {
 }
 .input-group input {
     font-size: 1.2em;
-    color: white !important;
+
     width: 100%;
     padding: 10px;
     outline: none;
     border: 2px solid var(--clr-neutral-300);
     border-radius: 10px;
-    background-color: blue !important;
 }
 .input-group input::placeholder {
     color: white;
@@ -57,16 +56,6 @@ h2 {
 
 .msg {
     display: none;
-}
-
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px blue inset;
-    /* Change the color to your own background color */
-    -webkit-text-fill-color: white;
-}
-input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px rgb(49, 134, 63) inset; /*your box-shadow*/
-    -webkit-text-fill-color: white;
 }
 
 /* button */
@@ -88,14 +77,17 @@ input:-webkit-autofill:focus {
 /* errors */
 .input-group.error input {
     font-size: 1.3em;
-    box-shadow: 0 0 10px red !important;
+    box-shadow: 0 0 10px red;
     background-color: rgba(255, 0, 64, 0.973);
-    -webkit-box-shadow: 0 0 0 50px rgba(255, 0, 64, 0.973) inset !important ;
-    /* Change the color to your own background color */
-    -webkit-text-fill-color: white;
 }
 
 .input-group.error .msg {
+    display: block;
+    font-size: 1.2em;
+    margin-top: 7px;
+    color: red;
+}
+.error {
     display: block;
     font-size: 1.2em;
     margin-top: 7px;

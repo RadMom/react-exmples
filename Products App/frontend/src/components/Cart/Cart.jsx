@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { createOrder } from "../../redux/orders/orderActions";
-import CartItem from "./CartProduct";
+
 import classes from "./Cart.module.css";
+import { NavLink } from "react-router-dom";
+import CartProduct from "./CartProduct";
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -21,13 +23,14 @@ const Cart = () => {
                         <ul className={classes.cartItems}>
                             {cart.products.map((product) => (
                                 <li key={product.id}>
-                                    <CartItem product={product} />
+                                    <CartProduct product={product} />
                                 </li>
                             ))}
                         </ul>
                         <p>Total Price: {cart.totalPrice}</p>
                     </div>
                     <div>
+                        <NavLink to="/order">Order</NavLink>
                         <button onClick={orderHandler}>Buy</button>
                     </div>
                 </div>
