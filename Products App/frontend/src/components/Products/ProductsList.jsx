@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ProductDetails from "./ProductDetails";
 import classes from "./ProductsList.module.css";
+import Pagination from "../Pagination";
+import { getProducts } from "../../redux/products/productsActions";
 
 const ProductsList = (props) => {
+    const dispatch = useDispatch();
+    const pagination = useSelector((state) => state.paginationAndFilters.pagination);
+    const filters = useSelector((state) => state.paginationAndFilters.filters);
     const products = props.products;
     console.log(products);
     const error = props.error;
 
+    const handlePageChange = (page) => {
+        dispatch(getProducts({ ...filters, page }));
+    };
     return (
         <div>
             <div className={classes.products}>
@@ -31,6 +39,11 @@ const ProductsList = (props) => {
                     )}
                 </ul>
             </div>
+            <Pagination
+                totalPages={pagination.totalPages}
+                currentPage={pagination.currentPage}
+                onPageChange={handlePageChange}
+            />
         </div>
     );
 };

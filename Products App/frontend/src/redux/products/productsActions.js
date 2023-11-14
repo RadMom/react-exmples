@@ -1,13 +1,14 @@
 import axios from "axios";
 
 import { setLoading, setProducts, setError } from "./productsSlice";
+import { setPagination, setFilters } from "../paginationAndFilters/paginationAndFiltersSlice";
 
 const urlBase = "http://localhost:5000/";
 
 //GET ALL Products
 export const getProducts = (filters) => async (dispatch) => {
     dispatch(setLoading(true));
-    console.log(filters?.itemsPerPage);
+    console.log(filters);
     try {
         const { data } = await axios.get(urlBase + "products", {
             params: {
@@ -20,6 +21,8 @@ export const getProducts = (filters) => async (dispatch) => {
         });
         console.log(data);
         dispatch(setProducts(data.products));
+        dispatch(setPagination({ totalPages: data.totalPages, currentPage: data.currentPage }));
+        dispatch(setFilters(filters));
     } catch (error) {
         console.log(error);
         dispatch(

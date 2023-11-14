@@ -8,21 +8,26 @@ const getAllProducts = async (req, res) => {
         console.log(req.query);
         let query = {};
 
-        if (category) {
+        if (category && category.toLowerCase() !== "all") {
             query.category = category;
         }
 
-        let sortOptions;
+        // Include the search term in your query
+        if (search) {
+            query.name = { $regex: new RegExp(search, "i") };
+        }
+
+        let sortOptions = {};
         if (sortBy) {
-            if (sortBy === "lowest") {
-                sortOptions = 1;
+            if (sortBy === "1") {
+                sortOptions.price = -1;
             } else {
-                sortOptions = 1;
+                sortOptions.price = 1;
             }
         }
         console.log(sortOptions);
         const products = await Product.find(query)
-            .sort({ price: sortOptions })
+            .sort(sortOptions)
             .skip((page - 1) * limit)
             .limit(limit);
 

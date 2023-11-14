@@ -7,8 +7,10 @@ const productsSlice = createSlice({
         filteredProducts: [],
         loading: false,
         error: null,
-        totalPages: 0,
-        currentPage: 1,
+        pagination: {
+            totalPages: 0,
+            currentPage: 1,
+        },
         filters: {
             category: "",
             sortBy: "",
@@ -16,6 +18,14 @@ const productsSlice = createSlice({
         },
     },
     reducers: {
+        setFilters(state, action) {
+            state.filters = action.payload;
+            console.log(action.payload);
+        },
+        setPagination(state, action) {
+            state.pagination = { ...action.payload };
+            console.log(action.payload);
+        },
         setLoading(state, action) {
             state.loading = action.payload;
         },
@@ -103,6 +113,8 @@ const productsSlice = createSlice({
 });
 
 export const {
+    setFilters,
+    setPagination,
     setLoading,
     setProducts,
     setProduct,

@@ -29,6 +29,7 @@ const CartProduct = (props) => {
             <thead>
                 <tr>
                     <th>Image</th>
+                    <th>Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
                 </tr>
@@ -36,12 +37,11 @@ const CartProduct = (props) => {
             <tbody>
                 <tr>
                     <td className={classes.image}>
-                        <td className={classes.name}>
-                            <p>{props.product.name}</p>
-                        </td>
                         <img src={donkey} alt={props.product.name} />
                     </td>
-
+                    <td className={classes.name}>
+                        <p>{props.product.name}</p>
+                    </td>
                     <td className={classes.quantity}>
                         <div className={classes.buttons}>
                             <button
