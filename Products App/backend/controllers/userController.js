@@ -79,18 +79,70 @@ const getUserOrders = async (req, res) => {
 
 //getAllUsers controller
 const getAllUsers = async (req, res) => {
-    const users = await User.find({});
-    res.json({ users });
+    try {
+        const { pagination, sortBy, search } = req.query;
+        const page = pagination.page;
+        const limit = pagination.limit;
+        const searchBy = search.searchBy; //can be id or name
+        const searchInput = search.searchInput;
+
+        console.log(req.query);
+        let query = {};
+
+        if (search && search.searchBy && search.searchInput) {
+            if (searchBy === "id" || searchBy === "name") {
+                query[searchBy] = { $regex: new RegExp(searchInput, "i") };
+            } else {
+                res.status(400);
+                throw new Error("invalid search parameter");
+            }
+        }
+
+        let sortOptions = {};
+        if (sortBy) {
+            if (sortBy === "1") {
+                sortOptions.name = 1;
+            } else {
+                sortOptions.name = -1;
+            }
+        }
+        console.log(sortOptions);
+        const users = await User.find(query)
+            .sort(sortOptions)
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        console.log(products.length);
+        // Count total products for pagination
+        const totalUsers = await User.countDocuments(query);
+
+        if (users) {
+            res.json({
+                users,
+                totalPages: Math.ceil(totalProducts / limit),
+                currentPage: parseInt(page),
+            });
+        } else {
+            res.status(404);
+            throw new Error("User not found.");
+        }
+    } catch (error) {
+        res.json(error.message);
+    }
 };
 
 //deleteUser controller
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            res.status(404);
+            throw new Error("User not found");
+        }
         res.json(user);
-    } catch (error) {
+    } catch (err) {
         res.status(404);
-        throw new Error("This user could not be found.");
+        throw new Error(err.message);
     }
 };
 

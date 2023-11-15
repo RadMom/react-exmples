@@ -57,13 +57,14 @@ const getProduct = async (req, res) => {
         const product = await Product.findById(req.params.id);
 
         if (product) {
-            res.json(product);
+            res.status(200).json(product);
         } else {
             res.status(404);
             throw new Error("Product not found.");
         }
-    } catch (error) {
-        res.json(error.message);
+    } catch (err) {
+        console.error("Get productById error: ", err);
+        throw new Error(err.message);
     }
 };
 
@@ -105,11 +106,11 @@ const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
 
-        if (product) {
-            res.json(product);
-        } else {
+        if (!product) {
             res.status(404);
             throw new Error("Product not found");
+        } else {
+            res.status(200).json({ message: "Product deleted successfully" });
         }
     } catch (error) {
         res.status(404).json(error.message);

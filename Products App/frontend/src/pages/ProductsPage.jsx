@@ -4,6 +4,7 @@ import ProductsNavigation from "../components/Navigations&Footer/ProductsNavigat
 import { getProducts } from "../redux/products/productsActions";
 
 import ProductsList from "../components/Products/ProductsList";
+import ReusableNav from "../components/Navigations&Footer/ReusableNav";
 
 const ProductsPage = () => {
     console.log("ProductsPage");
@@ -20,8 +21,16 @@ const ProductsPage = () => {
         }
     }, [dispatch]);
 
+    const filterOptions = [
+        { category: { options: ["all", "test1", "test2", "test3", "test4"] } },
+        { sortBy: { options: ["lowest", "highest"] } },
+        { itemsPerPage: { options: [5, 10, 20] } },
+        { search: "" },
+    ];
+
     return (
         <>
+            <ReusableNav options={filterOptions} />
             <ProductsNavigation />
             {loading && !products && !filteredProducts && <p>Loading...</p>}
             {error && <p>{error}</p>}
