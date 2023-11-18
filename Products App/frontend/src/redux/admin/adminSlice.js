@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
     users: [],
@@ -18,7 +18,8 @@ const adminSlice = createSlice({
             state.isLoading = false;
         },
         setUsers(state, action) {
-            state.users = action.payload.users;
+            console.log(action.payload);
+            state.users = action.payload;
             state.isLoading = false;
             state.error = null;
         },

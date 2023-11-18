@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     addProductToCart,
     subtractProductFromCart,
@@ -10,7 +10,11 @@ import classes from "./CartProduct.module.css";
 import donkey from "../../assets/donkey.jpg";
 
 const CartProduct = (props) => {
+    // TO DO LIST FOR THIS COMPONENT:
+    // 1. if product.stock==0 => disable add button
     const dispatch = useDispatch();
+    const products = useSelector((state) => state.products);
+    console.log(props.product.stock);
 
     const subtractProductHandler = (id) => {
         dispatch(subtractProductFromCart(id));

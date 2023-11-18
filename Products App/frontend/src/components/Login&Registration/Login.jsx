@@ -6,7 +6,7 @@ import classes from "./Login.module.css";
 import Card from "../../UI/Card";
 import { login } from "../../redux/auth/authActions";
 
-const Login = () => {
+const Login = ({ closeModal }) => {
     console.log("Login.jsx");
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -34,6 +34,9 @@ const Login = () => {
         const email = enteredValues.email;
         const password = enteredValues.password;
         dispatch(login(email, password, navigate));
+        if (closeModal) {
+            closeModal();
+        }
     };
 
     useEffect(() => {

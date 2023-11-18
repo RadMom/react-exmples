@@ -2,27 +2,25 @@ import React, { useState, useEffect } from "react";
 import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/products/productsActions";
-import { resetProductsFilters } from "../../redux/paginationAndFilters/paginationAndFiltersSlice";
+import { resetUsersFilters } from "../../redux/paginationAndFilters/paginationAndFiltersSlice";
+import { getAllOrders, getAllUsers } from "../../redux/admin/adminActions";
 
-const categories = ["all", "test1", "test2", "test3", "test4"];
-
-const ProductsNavigation = () => {
+const UsersFilters = () => {
     const dispatch = useDispatch();
 
     // Get the current filters from the Redux store
-    const currentFilters = useSelector((state) => state.paginationAndFilters.filters.products);
+    const usersFilters = useSelector((state) => state.paginationAndFilters.filters.users);
 
     // Set up local state to manage updated filters
     const [updatedFilters, setUpdatedFilters] = useState({
-        category: currentFilters?.category || "all",
-        sortBy: currentFilters?.sortBy || "lowest",
-        itemsPerPage: currentFilters?.itemsPerPage || 10,
-        search: currentFilters?.search || "",
+        itemsPerPage: usersFilters?.itemsPerPage || 10,
+        searchBy: usersFilters?.searchBy || "id",
+        search: usersFilters?.search || "",
     });
 
     // Handle filter changes
     const handleFilters = () => {
-        dispatch(getProducts(updatedFilters));
+        dispatch(getAllUsers(updatedFilters));
     };
 
     // Handle applying filters
@@ -37,40 +35,23 @@ const ProductsNavigation = () => {
     // Handle resetting filters to default values
     const handleResetFilters = () => {
         // Dispatch the action to reset filters in Redux store
-        dispatch(resetProductsFilters());
+        dispatch(resetUsersFilters());
 
         // Reset local state to default filter values
         setUpdatedFilters({
-            category: "all",
-            sortBy: "lowest",
             itemsPerPage: 10,
+            searchBy: "id",
             search: "",
         });
 
         // Fetch products with default filters
-        dispatch(getProducts());
+        dispatch(getAllUsers());
     };
 
     return (
         <table className={classes["products-nav-table"]}>
             <tbody>
                 <tr>
-                    <td>
-                        <label htmlFor="category">Category</label>
-                        <select
-                            id="category"
-                            name="category"
-                            value={updatedFilters.category}
-                            onChange={handleFiltersChange}
-                        >
-                            {categories.map((category) => (
-                                <option key={category} value={category}>
-                                    {category}
-                                </option>
-                            ))}
-                        </select>
-                    </td>
-
                     <td>
                         <label htmlFor="itemsPerPage">Products per page</label>
                         <select
@@ -86,15 +67,15 @@ const ProductsNavigation = () => {
                     </td>
 
                     <td>
-                        <label htmlFor="sortBy">Price</label>
+                        <label htmlFor="searchBy">Search by:</label>
                         <select
                             id="sortBy"
                             name="sortBy"
                             value={updatedFilters.sortBy}
                             onChange={handleFiltersChange}
                         >
-                            <option value="-1">Lowest first</option>
-                            <option value="1">Highest first</option>
+                            <option value="id">User ID</option>
+                            <option value="name">User name</option>
                         </select>
                     </td>
 
@@ -119,4 +100,4 @@ const ProductsNavigation = () => {
     );
 };
 
-export default ProductsNavigation;
+export default UsersFilters;

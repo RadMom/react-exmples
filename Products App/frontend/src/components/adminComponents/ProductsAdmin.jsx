@@ -13,6 +13,10 @@ import donkey from "../../assets/donkey.jpg";
 const ProductsAdmin = () => {
     const products = useSelector((state) => state.products.products);
 
+    //TO DO LIST
+    //1. Pagination
+    //2. Filters -same as in productsList
+
     console.log(products);
     const dispatch = useDispatch();
     // const navigate = useNavigate();

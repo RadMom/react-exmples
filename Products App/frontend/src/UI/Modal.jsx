@@ -4,18 +4,10 @@ import classes from "./Modal.module.css";
 
 const portalElement = document.getElementById("modal");
 
-// const Backdrop = (props) => {
-//     return (
-//         <div className={classes.backdrop} onClick={props.onClose}>
-//             {props.children}
-//         </div>
-//     );
-// };
-
 const Modal = (props) => {
     const closeModal = (e) => {
         if (e.target === e.currentTarget) {
-            props.onClose();
+            props.closeModal();
         }
     };
     return (

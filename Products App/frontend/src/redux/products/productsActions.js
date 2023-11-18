@@ -1,7 +1,10 @@
 import axios from "axios";
 
 import { setLoading, setProducts, setError } from "./productsSlice";
-import { setPagination, setFilters } from "../paginationAndFilters/paginationAndFiltersSlice";
+import {
+    setProductsPagination,
+    setProductsFilters,
+} from "../paginationAndFilters/paginationAndFiltersSlice";
 
 const urlBase = "http://localhost:5000/";
 
@@ -21,8 +24,10 @@ export const getProducts = (filters) => async (dispatch) => {
         });
         console.log(data);
         dispatch(setProducts(data.products));
-        dispatch(setPagination({ totalPages: data.totalPages, currentPage: data.currentPage }));
-        dispatch(setFilters(filters));
+        dispatch(
+            setProductsPagination({ totalPages: data.totalPages, currentPage: data.currentPage })
+        );
+        dispatch(setProductsFilters(filters));
     } catch (error) {
         console.log(error);
         dispatch(
@@ -44,7 +49,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
     try {
         const { data } = await axios.get(urlBase + { id });
         console.log(data);
-        dispatch(setProduct(data));
+        dispatch(setProducts(data));
     } catch (error) {
         dispatch(
             setError(

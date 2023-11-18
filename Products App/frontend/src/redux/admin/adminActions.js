@@ -2,6 +2,7 @@ import axios from "axios";
 import { setUpdatedProducts, setDeleteProduct } from "../products/productsSlice";
 import { setUsers } from "./adminSlice";
 import store from "../index";
+import { setUsersPagination } from "../paginationAndFilters/paginationAndFiltersSlice";
 
 const baseUrl = "http://localhost:5000/";
 const token = JSON.parse(localStorage.getItem("userInfo"))?.token || undefined;
@@ -104,17 +105,25 @@ export const editProduct =
     };
 
 //GET ALL Users
-export const getAllUsers = () => async (dispatch, getState) => {
+export const getAllUsers = (filters) => async (dispatch, getState) => {
     const token = getState().auth.userInfo.token;
     console.log(token);
     // const state = store.getState();
     // const token = state.auth.userInfo?.token || undefined;
     try {
-        const { data } = await axios.get(baseUrl + "user", {
+        const response = await axios.get(baseUrl + "user", {
+            params: {
+                pagination: { page: filters?.page || 1, limit: filters?.itemsPerPage || 10 },
+
+                searchBy: filters?.searchBy || "id",
+                search: filters?.search || "",
+            },
             headers: { authorization: `Bearer ${token}` },
         });
-        console.log(data);
-        dispatch(setUsers(data));
+
+        console.log(response.data);
+        dispatch(setUsers(response.data.users));
+        dispatch(setUsersPagination(response.data.pagination));
     } catch (error) {
         console.log(error);
     }

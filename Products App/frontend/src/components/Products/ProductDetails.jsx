@@ -15,6 +15,7 @@ import Modal from "../../UI/Modal";
 const ProductDetails = (props) => {
     const { title, price, description, image, id } = props;
     const { userInfo } = useSelector((state) => state.auth);
+    const productsError = useSelector((state) => state.products.error);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -25,19 +26,21 @@ const ProductDetails = (props) => {
             setShowModal(true);
             return;
         }
-        dispatch(addProductToCart(props));
         dispatch(setDecrementProductQuantity(props));
+        if (!productsError) {
+            dispatch(addProductToCart(props));
+        }
     };
 
-    const onClose = () => {
+    const closeModal = () => {
         setShowModal(false);
     };
 
     return (
         <>
             {showModal && (
-                <Modal onClose={onClose}>
-                    <Login />
+                <Modal closeModal={closeModal}>
+                    <Login closeModal={closeModal} />
                 </Modal>
             )}
             <Card>

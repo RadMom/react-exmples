@@ -79,19 +79,30 @@ const getUserOrders = async (req, res) => {
 
 //getAllUsers controller
 const getAllUsers = async (req, res) => {
+    console.log(req.query);
     try {
-        const { pagination, sortBy, search } = req.query;
+        const { pagination, searchBy, search } = req.query;
         const page = pagination.page;
         const limit = pagination.limit;
-        const searchBy = search.searchBy; //can be id or name
-        const searchInput = search.searchInput;
 
         console.log(req.query);
+
+        if (searchBy === "id") {
+            const user = await User.findById(search);
+            if (user) {
+                return res.status(200).json(user);
+            } else {
+                res.status(404);
+                throw new Error("User not found.");
+            }
+        }
         let query = {};
 
-        if (search && search.searchBy && search.searchInput) {
-            if (searchBy === "id" || searchBy === "name") {
-                query[searchBy] = { $regex: new RegExp(searchInput, "i") };
+        if (searchBy && searchInput) {
+            if (searchBy === "id") {
+                query[searchBy] = searchInput;
+            } else if (searchBy === "name") {
+                query[searchBy] = { $regex: new RegExp(search, "i") };
             } else {
                 res.status(400);
                 throw new Error("invalid search parameter");
@@ -106,28 +117,31 @@ const getAllUsers = async (req, res) => {
                 sortOptions.name = -1;
             }
         }
-        console.log(sortOptions);
+        console.log("userController-query: " + query);
         const users = await User.find(query)
             .sort(sortOptions)
             .skip((page - 1) * limit)
             .limit(limit);
 
-        console.log(products.length);
+        console.log(users.length);
         // Count total products for pagination
         const totalUsers = await User.countDocuments(query);
 
         if (users) {
+            console.log(users);
             res.json({
                 users,
-                totalPages: Math.ceil(totalProducts / limit),
-                currentPage: parseInt(page),
+                pagination: {
+                    totalPages: Math.ceil(totalUsers / limit),
+                    currentPage: parseInt(page),
+                },
             });
         } else {
             res.status(404);
             throw new Error("User not found.");
         }
     } catch (error) {
-        res.json(error.message);
+        res.json(error);
     }
 };
 
