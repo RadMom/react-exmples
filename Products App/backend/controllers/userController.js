@@ -78,70 +78,41 @@ const getUserOrders = async (req, res) => {
 };
 
 //getAllUsers controller
+
+// Route for fetching users
 const getAllUsers = async (req, res) => {
-    console.log(req.query);
     try {
-        const { pagination, searchBy, search } = req.query;
-        const page = pagination.page;
-        const limit = pagination.limit;
+        const { page, limit, searchBy, search } = req.query;
 
-        console.log(req.query);
-
-        if (searchBy === "id") {
-            const user = await User.findById(search);
-            if (user) {
-                return res.status(200).json(user);
-            } else {
-                res.status(404);
-                throw new Error("User not found.");
-            }
-        }
         let query = {};
 
-        if (searchBy && searchInput) {
-            if (searchBy === "id") {
-                query[searchBy] = searchInput;
-            } else if (searchBy === "name") {
-                query[searchBy] = { $regex: new RegExp(search, "i") };
+        // Handle different search criteria
+        if (searchBy === "id" && search.length > 0) {
+            const user = await User.findById(search);
+            if (user) {
+                return res.status(200).json({ users: [user], totalPages: 1, currentPage: 1 });
             } else {
-                res.status(400);
-                throw new Error("invalid search parameter");
+                return res.status(404).json({ message: "User not found." });
             }
+        } else if (searchBy === "name" && search.length > 0) {
+            query.username = { $regex: new RegExp(search, "i") };
         }
 
-        let sortOptions = {};
-        if (sortBy) {
-            if (sortBy === "1") {
-                sortOptions.name = 1;
-            } else {
-                sortOptions.name = -1;
-            }
-        }
-        console.log("userController-query: " + query);
+        console.log(query);
         const users = await User.find(query)
-            .sort(sortOptions)
             .skip((page - 1) * limit)
             .limit(limit);
 
-        console.log(users.length);
-        // Count total products for pagination
         const totalUsers = await User.countDocuments(query);
 
-        if (users) {
-            console.log(users);
-            res.json({
-                users,
-                pagination: {
-                    totalPages: Math.ceil(totalUsers / limit),
-                    currentPage: parseInt(page),
-                },
-            });
-        } else {
-            res.status(404);
-            throw new Error("User not found.");
-        }
+        return res.json({
+            users,
+            totalPages: Math.ceil(totalUsers / limit),
+            currentPage: parseInt(page),
+        });
     } catch (error) {
-        res.json(error);
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
     }
 };
 

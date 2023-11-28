@@ -13,7 +13,7 @@ const productsSlice = createSlice({
             state.loading = action.payload;
         },
         setProducts(state, action) {
-            state.products = action.payload;
+            state.products = action.payload; //expecting products array
             state.loading = false;
             state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(action.payload)));
@@ -44,10 +44,8 @@ const productsSlice = createSlice({
             }
         },
         setDecrementProductQuantity(state, action) {
-            console.log(current(state.products));
             console.log(action.payload);
             const id = action.payload.id;
-            console.log(action.payload.id);
             const existingItem = state.products.find((product) => product._id == id);
             console.log(existingItem);
             if (existingItem) {
@@ -57,24 +55,6 @@ const productsSlice = createSlice({
                     throw new Error("Product quantity is 0!!! )");
                 }
             }
-        },
-        setFilteredProdyctsByCategory(state, action) {
-            console.log(action.payload);
-            const category = action.payload;
-            if (category === "All") {
-                state.filteredProducts = [];
-                return;
-            }
-
-            state.filteredProducts = state.products.filter(
-                (product) => product.category === category
-            );
-            if (state.filteredProducts.length === 0) {
-                state.error = "no products";
-                return;
-            }
-            state.error = null;
-            console.log(state.filteredProducts);
         },
     },
     // extraReducers: (builder) =>
@@ -102,7 +82,6 @@ export const {
     setError,
     setDeleteProduct,
     setUpdatedProducts,
-    setFilteredProdyctsByCategory,
     setDecrementProductQuantity,
 } = productsSlice.actions;
 

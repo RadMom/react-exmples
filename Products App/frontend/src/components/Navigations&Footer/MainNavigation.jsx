@@ -94,7 +94,7 @@ const MainNavigation = () => {
                             <span className={classes.icon}>
                                 <BsCart2 />
                             </span>
-                            <span>Items: </span>
+                            {/* <span>Items: </span> */}
 
                             <span className={classes.badges}>{cart.totalQuantity}</span>
                         </NavLink>

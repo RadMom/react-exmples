@@ -6,6 +6,20 @@ const initialState = {
     error: null,
 };
 
+// const order = {
+//     userId,
+//     username,
+//     userEmail,
+//     orderItems: [],
+//     shippingAddress: [],
+//     paymentMethod,
+//     paymentDetails,
+//     shippingPrice,
+//     totalPrice,
+//     paidAt,
+//     isDelivered,
+//     deliveredAt,
+// };
 const orderSlice = createSlice({
     name: "orders",
     initialState,
@@ -19,7 +33,7 @@ const orderSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        setIsLOading(state, action) {
+        setIsLoading(state, action) {
             state.error = null;
             state.isLoading = action.payload;
         },

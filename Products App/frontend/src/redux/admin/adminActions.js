@@ -6,10 +6,6 @@ import { setUsersPagination } from "../paginationAndFilters/paginationAndFilters
 
 const baseUrl = "http://localhost:5000/";
 const token = JSON.parse(localStorage.getItem("userInfo"))?.token || undefined;
-// let token = "";
-// if (getToken) {
-//     token = getToken.token;
-// }
 
 export const createProduct =
     (productName, productImage, productCategory, productDescription, productPrice, productStock) =>
@@ -107,13 +103,15 @@ export const editProduct =
 //GET ALL Users
 export const getAllUsers = (filters) => async (dispatch, getState) => {
     const token = getState().auth.userInfo.token;
-    console.log(token);
+    console.log(filters);
     // const state = store.getState();
     // const token = state.auth.userInfo?.token || undefined;
+    // searchBy: "id", search: "", sortBy: "createdAt"
     try {
         const response = await axios.get(baseUrl + "user", {
             params: {
-                pagination: { page: filters?.page || 1, limit: filters?.itemsPerPage || 10 },
+                page: filters?.page || 1, //currentPage
+                limit: filters?.usersPerPage || 10, //usersPerPage
 
                 searchBy: filters?.searchBy || "id",
                 search: filters?.search || "",
@@ -121,9 +119,14 @@ export const getAllUsers = (filters) => async (dispatch, getState) => {
             headers: { authorization: `Bearer ${token}` },
         });
 
-        console.log(response.data);
+        console.log(response.data.users);
         dispatch(setUsers(response.data.users));
-        dispatch(setUsersPagination(response.data.pagination));
+        dispatch(
+            setUsersPagination({
+                totalPages: response.data.totalPages,
+                currentPage: response.data.currentPage,
+            })
+        );
     } catch (error) {
         console.log(error);
     }

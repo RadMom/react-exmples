@@ -11,7 +11,7 @@ const initialState = {
     },
     filters: {
         products: { category: "", sortBy: "", search: "" },
-        users: { searchBy: "id", search: "", sortBy: "createdAt" },
+        users: { searchBy: "id", search: "", usersPerPage: 10 },
         orders: { searchBy: "id", search: "", sortBy: "createdAt" },
     },
 };
@@ -35,7 +35,7 @@ const paginationAndFiltersSlice = createSlice({
 
         //user actions
         setUsersPagination(state, action) {
-            state.pagination.users = { ...action.payload };
+            state.pagination.users = action.payload;
             console.log(action.payload);
         },
         setUsersFilters(state, action) {

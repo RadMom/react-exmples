@@ -26,16 +26,15 @@ const ProductDetails = (props) => {
             setShowModal(true);
             return;
         }
-        dispatch(setDecrementProductQuantity(props));
-        if (!productsError) {
-            dispatch(addProductToCart(props));
-        }
+        dispatch(addProductToCart(props));
     };
 
     const closeModal = () => {
         setShowModal(false);
     };
 
+    //How to manage product stock?
+    // Every time when fetch products to check cart products and reduce product stock?
     return (
         <>
             {showModal && (
@@ -54,11 +53,17 @@ const ProductDetails = (props) => {
 
                 <div className={classes["price-and-stock"]}>
                     <p className={classes.price}>${price}</p>
-                    <p className={classes.stock}>Stock: {props.product.stock}</p>
+                    <p className={classes.stock}>Stock: {props.stock}</p>
                 </div>
 
                 <div className={classes.actions}>
-                    <button onClick={addToCartHandler}>Add to Cart</button>
+                    <button
+                        onClick={addToCartHandler}
+                        disabled={props.stock == 0}
+                        className={props.stock > 0 ? "btn-active" : "btn-inactive"}
+                    >
+                        {props.stock > 0 ? "Add to cart" : "Out of stock"}
+                    </button>
                 </div>
             </Card>
         </>

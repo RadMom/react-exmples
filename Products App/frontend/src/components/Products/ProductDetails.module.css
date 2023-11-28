@@ -41,3 +41,8 @@
     margin-top: 7px;
     background-color: green;
 }
+
+button:disabled {
+    background-color: var(--clr-error);
+    color: black;
+}

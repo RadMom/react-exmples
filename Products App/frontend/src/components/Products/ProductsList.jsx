@@ -5,7 +5,6 @@ import ProductDetails from "./ProductDetails";
 
 const ProductsList = (props) => {
     const products = props.products;
-    console.log(products);
     const error = props.error;
 
     return (
@@ -16,7 +15,8 @@ const ProductsList = (props) => {
                         products.map((product) => (
                             <li key={product._id} className={classes.item}>
                                 <ProductDetails
-                                    product={product}
+                                    // We pass what we need in ProductDetails.jsx
+                                    stock={product.stock}
                                     id={product._id}
                                     image={product.image}
                                     title={product.name}

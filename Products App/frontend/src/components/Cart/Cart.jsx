@@ -10,7 +10,7 @@ import CartProduct from "./CartProduct";
 const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
-    console.log(typeof cart.products);
+    console.log(cart);
     //Must finish order action
     const orderHandler = () => {
         dispatch(createOrder(cart.products));

@@ -29,7 +29,7 @@ import LoginPage from "./pages/LoginPage";
 import Cart from "./components/Cart/Cart";
 //admin
 import AdminLayout from "./layouts/AdminLayout";
-import ProductsAdmin from "./components/adminComponents/ProductsAdmin";
+import ProductsAdmin from "./pages/admin/ProductsAdmin";
 import UsersAdmin from "./components/adminComponents/UsersAdmin";
 import OrdersAdmin from "./components/adminComponents/OrdersAdmin";
 import CreateProduct from "./pages/admin/ProductForm";

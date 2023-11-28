@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../redux/products/productsActions";
-import { resetProductsFilters } from "../../redux/paginationAndFilters/paginationAndFiltersSlice";
+import {
+    resetProductsFilters,
+    setProductsFilters,
+} from "../../redux/paginationAndFilters/paginationAndFiltersSlice";
 
 const categories = ["all", "test1", "test2", "test3", "test4"];
 
@@ -23,6 +26,7 @@ const ProductsNavigation = () => {
     // Handle filter changes
     const handleFilters = () => {
         dispatch(getProducts(updatedFilters));
+        dispatch(setProductsFilters(updatedFilters));
     };
 
     // Handle applying filters

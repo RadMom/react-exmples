@@ -23,6 +23,9 @@ const adminSlice = createSlice({
             state.isLoading = false;
             state.error = null;
         },
+        serUser(state, action) {
+            console.log(action.payload);
+        },
     },
 });
 

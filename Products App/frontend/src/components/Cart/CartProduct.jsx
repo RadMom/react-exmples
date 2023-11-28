@@ -10,11 +10,12 @@ import classes from "./CartProduct.module.css";
 import donkey from "../../assets/donkey.jpg";
 
 const CartProduct = (props) => {
+    console.log(props);
     // TO DO LIST FOR THIS COMPONENT:
     // 1. if product.stock==0 => disable add button
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
-    console.log(props.product.stock);
+    console.log(products);
 
     const subtractProductHandler = (id) => {
         dispatch(subtractProductFromCart(id));
@@ -54,8 +55,13 @@ const CartProduct = (props) => {
                             >
                                 -
                             </button>
-                            <p>{props.product.quantity}</p>
+                            <p>
+                                {props.product.quantity > props.product.stock
+                                    ? props.product.stock
+                                    : props.product.quantity}
+                            </p>
                             <button
+                                disabled={props.product.quantity >= props.product.maxQuantity}
                                 className={classes["btn-increment"]}
                                 onClick={() => addProductHandler(props.product)}
                             >

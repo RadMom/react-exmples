@@ -1,11 +1,12 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { setDecrementProductQuantity } from "../products/productsSlice";
 
-// const item = {
+// const product = {
 //     id,
 //     name,
 //     price,
 //     quantity,
+//     maxQuantity,
 //     totalPriceForItem,
 // };
 
@@ -17,7 +18,6 @@ const cartSlice = createSlice({
         totalPrice: 0,
         isLoading: false,
         error: null,
-        changed: false,
     },
     reducers: {
         //Need this reducer for fetchingData in App.jsx
@@ -28,28 +28,33 @@ const cartSlice = createSlice({
             state.totalPrice = action.payload.totalPrice || 0;
         },
         addProductToCart(state, action) {
+            console.log(action.payload);
             state.isLoading = true;
             const newItem = action.payload;
+            console.log(newItem);
             const existingItem = state.products.find((item) => item.id === newItem.id);
 
-            //We can add only 1 item!!!
-            state.totalQuantity++;
-            state.changed = true; //Must change this to true - if (cart.changed) then sendCartData in App.jsx
             if (!existingItem) {
                 state.products.push({
                     id: newItem.id,
                     name: newItem.title,
                     price: Number(newItem.price),
                     quantity: 1,
+                    maxQuantity: newItem.stock,
                     totalPriceForItem: Number(newItem.price),
                 });
                 state.totalPrice += Number(newItem.price);
             } else {
+                if (existingItem.maxQuantity <= existingItem.quantity) {
+                    return;
+                }
                 existingItem.quantity++;
                 existingItem.totalPriceForItem =
                     existingItem.totalPriceForItem + Number(newItem.price);
                 state.totalPrice += Number(newItem.price);
             }
+            //We can add only 1 item!!!
+            state.totalQuantity++;
             console.log(current(state.products));
         },
         subtractProductFromCart(state, action) {

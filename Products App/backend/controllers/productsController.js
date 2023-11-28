@@ -25,7 +25,7 @@ const getAllProducts = async (req, res) => {
                 sortOptions.price = 1;
             }
         }
-        console.log(sortOptions);
+        console.log(query);
         const products = await Product.find(query)
             .sort(sortOptions)
             .skip((page - 1) * limit)

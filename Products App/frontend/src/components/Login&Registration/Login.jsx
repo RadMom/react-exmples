@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import Card from "../../UI/Card";
 import { login } from "../../redux/auth/authActions";
+import { setError } from "../../redux/auth/authSlice";
 
 const Login = ({ closeModal }) => {
     console.log("Login.jsx");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const error = useSelector((state) => state.auth.error);
+    const { userInfo, isLoading, error } = useSelector((state) => state.auth);
 
     const [unexpectedError, setUnexpectedError] = useState(false);
     const [emailError, setEmailError] = useState();
@@ -26,6 +27,7 @@ const Login = ({ closeModal }) => {
             ...enteredValues,
             [name]: value,
         }));
+        dispatch(setError(null));
     };
 
     const formSubmitHandler = async (e) => {
@@ -34,10 +36,14 @@ const Login = ({ closeModal }) => {
         const email = enteredValues.email;
         const password = enteredValues.password;
         dispatch(login(email, password, navigate));
-        if (closeModal) {
+    };
+
+    useEffect(() => {
+        dispatch(setError(null));
+        if (closeModal && userInfo) {
             closeModal();
         }
-    };
+    }, [userInfo]);
 
     useEffect(() => {
         error === "Invalid password..."

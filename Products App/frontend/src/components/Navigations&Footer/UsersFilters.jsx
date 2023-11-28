@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./ProductsNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../redux/products/productsActions";
+
 import { resetUsersFilters } from "../../redux/paginationAndFilters/paginationAndFiltersSlice";
 import { getAllOrders, getAllUsers } from "../../redux/admin/adminActions";
 
@@ -13,14 +13,14 @@ const UsersFilters = () => {
 
     // Set up local state to manage updated filters
     const [updatedFilters, setUpdatedFilters] = useState({
-        itemsPerPage: usersFilters?.itemsPerPage || 10,
+        usersPerPage: usersFilters?.usersPerPage || 10,
         searchBy: usersFilters?.searchBy || "id",
         search: usersFilters?.search || "",
     });
 
     // Handle filter changes
     const handleFilters = () => {
-        dispatch(getAllUsers(updatedFilters));
+        dispatch(getAllUsers({ ...updatedFilters }));
     };
 
     // Handle applying filters
@@ -39,7 +39,7 @@ const UsersFilters = () => {
 
         // Reset local state to default filter values
         setUpdatedFilters({
-            itemsPerPage: 10,
+            usersPerPage: 10,
             searchBy: "id",
             search: "",
         });
@@ -53,11 +53,11 @@ const UsersFilters = () => {
             <tbody>
                 <tr>
                     <td>
-                        <label htmlFor="itemsPerPage">Products per page</label>
+                        <label htmlFor="usersPerPage">Users per page</label>
                         <select
-                            id="itemsPerPage"
-                            name="itemsPerPage"
-                            value={updatedFilters.itemsPerPage}
+                            id="usersPerPage"
+                            name="usersPerPage"
+                            value={updatedFilters.usersPerPage}
                             onChange={handleFiltersChange}
                         >
                             <option value={5}>5 per page</option>
@@ -69,9 +69,9 @@ const UsersFilters = () => {
                     <td>
                         <label htmlFor="searchBy">Search by:</label>
                         <select
-                            id="sortBy"
-                            name="sortBy"
-                            value={updatedFilters.sortBy}
+                            id="searchBy"
+                            name="searchBy"
+                            value={updatedFilters.searchBy}
                             onChange={handleFiltersChange}
                         >
                             <option value="id">User ID</option>

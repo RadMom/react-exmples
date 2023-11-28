@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/admin/adminActions";
 import UserInfoAdmin from "./UserInfoAdmin";
 import UsersFilters from "../Navigations&Footer/UsersFilters";
+import Pagination from "../Pagination";
 
 const UsersAdmin = () => {
     const { users } = useSelector((state) => state.admin);
@@ -14,12 +15,18 @@ const UsersAdmin = () => {
     //1. Pagination
     //2. Filters -by userId . Can add byCreatedAt
 
-    console.log(users);
+    console.log(usersFilters);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllUsers());
-    }, [dispatch]);
+        if (users.length === 0) {
+            dispatch(getAllUsers());
+        }
+    }, []);
+
+    const handlePageChange = (page) => {
+        dispatch(getAllUsers({ ...usersFilters, page }));
+    };
     return (
         <div>
             <UsersFilters />
@@ -28,6 +35,11 @@ const UsersAdmin = () => {
             ) : (
                 <p>No users</p>
             )}
+            <Pagination
+                totalPages={usersPagination.totalPages}
+                currentPage={usersPagination.currentPage}
+                onPageChange={handlePageChange}
+            />
         </div>
     );
 };

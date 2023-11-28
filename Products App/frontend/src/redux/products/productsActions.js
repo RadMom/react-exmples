@@ -9,13 +9,13 @@ import {
 const urlBase = "http://localhost:5000/";
 
 //GET ALL Products
-export const getProducts = (filters) => async (dispatch) => {
+export const getProducts = (filters, page) => async (dispatch) => {
     dispatch(setLoading(true));
     console.log(filters);
     try {
         const { data } = await axios.get(urlBase + "products", {
             params: {
-                page: filters?.page || 1,
+                page: page || 1,
                 limit: filters?.itemsPerPage || 10,
                 category: filters?.category || "",
                 sortBy: filters?.sortBy || "",
@@ -27,7 +27,6 @@ export const getProducts = (filters) => async (dispatch) => {
         dispatch(
             setProductsPagination({ totalPages: data.totalPages, currentPage: data.currentPage })
         );
-        dispatch(setProductsFilters(filters));
     } catch (error) {
         console.log(error);
         dispatch(

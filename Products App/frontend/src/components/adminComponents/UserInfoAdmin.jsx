@@ -28,7 +28,7 @@ function UserInfoAdmin(props) {
                 <input type="text" id="user-id" defaultValue={user._id} />
                 <br />
                 <label htmlFor="user-name">User name :</label>
-                <input type="text" id="user-name" defaultValue={user.name} />
+                <input type="text" id="user-name" defaultValue={user.username} />
                 <br />
                 <label htmlFor="user-email">User email :</label>
                 <input type="text" id="user-email" defaultValue={user.email} />
