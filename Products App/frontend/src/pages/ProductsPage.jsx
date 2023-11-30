@@ -13,7 +13,7 @@ import { getProducts } from "../redux/products/productsActions";
 const ProductsPage = () => {
     console.log("ProductsPage");
     const dispatch = useDispatch();
-    const { products, loading, error } = useSelector((state) => state.products);
+    const { products, isLoading, error } = useSelector((state) => state.products);
     const productsPagination = useSelector(
         (state) => state.paginationAndFilters.pagination.products
     );
@@ -34,9 +34,9 @@ const ProductsPage = () => {
         <div>
             {/* <ReusableNav options={filterOptions} /> */}
             <ProductsNavigation />
-            {loading && !products && !filteredProducts && <p>Loading...</p>}
+            {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            {products && (
+            {products && products.length > 0 && (
                 <>
                     <ProductsList products={products} />
                     <Pagination

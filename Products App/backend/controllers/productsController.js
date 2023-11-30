@@ -52,7 +52,7 @@ const getAllProducts = async (req, res) => {
 
 //GET PRODUCT,method:GET
 //URL: /products/:productId
-const getProduct = async (req, res) => {
+const getProduct = async (req, res, next) => {
     try {
         const product = await Product.findById(req.params.id);
 
@@ -64,7 +64,7 @@ const getProduct = async (req, res) => {
         }
     } catch (err) {
         console.error("Get productById error: ", err);
-        throw new Error(err.message);
+        next(err);
     }
 };
 

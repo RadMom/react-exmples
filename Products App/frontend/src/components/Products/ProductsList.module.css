@@ -14,3 +14,48 @@
     text-decoration: none;
     color: black;
 }
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-header {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
+
+.price-and-stock {
+    display: flex;
+    justify-content: space-between;
+}
+.price {
+    padding: 0.15rem 1.5rem;
+    background-color: #3a3a3a;
+    color: white;
+    font-size: 1.2rem;
+}
+.stock {
+    padding: 0.15rem 1.5rem;
+    font-size: 1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-start;
+}
+.actions button {
+    margin-top: 7px;
+    background-color: green;
+}
+
+.actions button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: var(--clr-error);
+    color: black;
+}

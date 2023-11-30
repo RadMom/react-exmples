@@ -7,6 +7,7 @@ const dotenv = require("dotenv").config();
 const orderRoutes = require("./routes/orderRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
+const errorHandler = require("./middleware/errorHandler");
 
 const port = process.env.PORT || 5000;
 const URL = process.env.MONGO_URL;
@@ -21,6 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/orders", orderRoutes);
+
+//errorHandler
+app.use(errorHandler);
 
 //mogoose setup
 mongoose.set("strictQuery", false);

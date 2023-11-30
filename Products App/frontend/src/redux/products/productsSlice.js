@@ -4,30 +4,35 @@ const productsSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
+        product: {},
         filteredProducts: [],
-        loading: false,
+        isLoading: false,
         error: null,
     },
     reducers: {
-        setLoading(state, action) {
-            state.loading = action.payload;
+        setIsLoading(state, action) {
+            state.isLoading = action.payload;
         },
         setProducts(state, action) {
             state.products = action.payload; //expecting products array
-            state.loading = false;
+            state.isLoading = false;
             state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(action.payload)));
         },
-
+        setProduct(state, action) {
+            state.product = action.payload;
+            state.isLoading = false;
+            state.error = null;
+        },
         setError(state, action) {
             state.error = action.payload;
-            state.loading = false;
+            state.isLoading = false;
         },
         setDeleteProduct(state, action) {
             const id = action.payload;
             state.products = state.products.filter((product) => product._id !== id);
             console.log(state.products);
-            state.loading = false;
+            state.isLoading = false;
             state.error = null;
             JSON.stringify(localStorage.setItem("products", JSON.stringify(state.products)));
         },
@@ -76,7 +81,7 @@ const productsSlice = createSlice({
 });
 
 export const {
-    setLoading,
+    setIsLoading,
     setProducts,
     setProduct,
     setError,

@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import Login from "../Login&Registration/Login";
 
-import { addProductToCart, addItemToCartAndReduceQuantity } from "../../redux/cart/cartSlice";
+import { addProductToCart } from "../../redux/cart/cartSlice";
 
 import Card from "../../UI/Card";
 import classes from "./ProductDetails.module.css";
 
 import donkey from "../../assets/donkey.jpg";
-import { setDecrementProductQuantity } from "../../redux/products/productsSlice";
 import Modal from "../../UI/Modal";
+import { getSingleProduct } from "../../redux/products/productsActions";
 
-const ProductDetails = (props) => {
-    const { title, price, description, image, id } = props;
+const ProductDetails = () => {
     const { userInfo } = useSelector((state) => state.auth);
-    const productsError = useSelector((state) => state.products.error);
-
     const [showModal, setShowModal] = useState(false);
-
     const dispatch = useDispatch();
+    const productId = useParams();
+    console.log(productId);
+
+    useEffect(() => {
+        dispatch(getSingleProduct(productId));
+    }, []);
 
     const addToCartHandler = () => {
         if (!userInfo) {
@@ -42,7 +45,8 @@ const ProductDetails = (props) => {
                     <Login closeModal={closeModal} />
                 </Modal>
             )}
-            <Card>
+
+            {/* <Card>
                 <header className={classes.header}>
                     <h3 data-full-text={title}>{title}</h3>
                     <img className={classes.image} src={donkey} />
@@ -65,7 +69,7 @@ const ProductDetails = (props) => {
                         {props.stock > 0 ? "Add to cart" : "Out of stock"}
                     </button>
                 </div>
-            </Card>
+            </Card> */}
         </>
     );
 };

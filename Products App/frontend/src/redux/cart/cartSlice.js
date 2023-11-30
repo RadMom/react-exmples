@@ -37,7 +37,7 @@ const cartSlice = createSlice({
             if (!existingItem) {
                 state.products.push({
                     id: newItem.id,
-                    name: newItem.title,
+                    name: newItem.name,
                     price: Number(newItem.price),
                     quantity: 1,
                     maxQuantity: newItem.stock,
@@ -46,6 +46,7 @@ const cartSlice = createSlice({
                 state.totalPrice += Number(newItem.price);
             } else {
                 if (existingItem.maxQuantity <= existingItem.quantity) {
+                    // state.error = "maxQuantity" + existingItem.maxQuantity;
                     return;
                 }
                 existingItem.quantity++;

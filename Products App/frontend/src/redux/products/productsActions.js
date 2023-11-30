@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { setLoading, setProducts, setError } from "./productsSlice";
+import { setProducts, setProduct, setError, setIsLoading } from "./productsSlice";
 import {
     setProductsPagination,
     setProductsFilters,
@@ -10,7 +10,7 @@ const urlBase = "http://localhost:5000/";
 
 //GET ALL Products
 export const getProducts = (filters, page) => async (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(setIsLoading(true));
     console.log(filters);
     try {
         const { data } = await axios.get(urlBase + "products", {
@@ -42,14 +42,16 @@ export const getProducts = (filters, page) => async (dispatch) => {
 };
 
 //GET SINGLE Product
-export const getSingleProduct = (id) => async (dispatch) => {
-    dispatch(setLoading(true));
+export const getSingleProduct = (productId) => async (dispatch) => {
+    dispatch(setIsLoading(true));
+    console.log(productId);
 
     try {
-        const { data } = await axios.get(urlBase + { id });
+        const { data } = await axios.get(urlBase + "products/" + productId);
         console.log(data);
-        dispatch(setProducts(data));
+        dispatch(setProduct(data));
     } catch (error) {
+        console.log(error);
         dispatch(
             setError(
                 error.response && error.response.data.message

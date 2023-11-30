@@ -8,16 +8,17 @@ import classes from "./ProductAdmin.module.css";
 
 const ProductAdmin = (props) => {
     const {
-        name,
-        description,
-        category,
-        image,
-        price,
-        numbersOfReviews,
-        rating,
-        reviews,
-        stock,
         user,
+        name,
+        image,
+        category,
+        description,
+        reviews,
+        rating,
+        numbersOfReviews,
+        price,
+        stock,
+        productIsNew,
         createdAt,
         updatedAt,
         _id,
@@ -28,8 +29,9 @@ const ProductAdmin = (props) => {
     const [productCategory, setProductCategory] = useState(category ? category : "");
     const [productDescription, setProductDescription] = useState(description ? description : "");
     const [productPrice, setProductPrice] = useState(price ? price : "");
-    const [productStock, setProductStock] = useState(stock ? stock : "");
-
+    const [productStock, setProductStock] = useState(stock ? stock : 0);
+    const [isNew, setIsNew] = useState(productIsNew ? productIsNew : false);
+    const [productCreatedAt, setProductCreatedAt] = useState(createdAt ? createdAt : "");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

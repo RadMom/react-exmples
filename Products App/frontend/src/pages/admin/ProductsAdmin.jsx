@@ -22,7 +22,6 @@ const ProductsAdmin = () => {
     //1. Pagination
     //2. Filters -same as in productsList
 
-    console.log(products);
     const dispatch = useDispatch();
     // const navigate = useNavigate();
 
