@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 
-const createOrder = async (req, res) => {
+const createOrder = async (req, res, next) => {
     const { products } = req.body;
 
     //products verification data
@@ -19,6 +19,7 @@ const createOrder = async (req, res) => {
     try {
         for (const orderProduct of products) {
             const product = await Product.findById(orderProduct.id);
+
             if (product && product.stock >= orderProduct.quantity) {
                 const priceForProduct = product.price * orderProduct.quantity;
                 if (priceForProduct !== orderProduct.totalPriceForItem) {
@@ -32,14 +33,14 @@ const createOrder = async (req, res) => {
 
                 //checked products
                 order.products.push(orderProduct);
-                //const createOrder=await Order.cereate(order)
+                //const createOrder=await Order.create(order)
             } else {
                 throw new Error("Insufficient quantity for a product in the order.");
             }
         }
     } catch (err) {
         console.log(err);
-        throw new Error(err);
+        next(err);
     }
     res.json(order);
 };
@@ -63,7 +64,25 @@ const deleteOrder = async (req, res) => {
     }
 };
 
-const getUserOrders = async (req, res) => {};
+//getUserOrders controller
+const getUserOrders = async (req, res, next) => {
+    const id = req.params.id;
+    if (!id) {
+        throw new Error("");
+    }
+
+    try {
+        const orders = await Order.find({ user: req.params.id });
+        if (orders) {
+            return res.status(200).json(orders);
+        } else {
+            res.status(404);
+            throw new Error("No Orders found for this User");
+        }
+    } catch (error) {
+        next(error);
+    }
+};
 
 const getAllOrders = async (req, res) => {
     try {

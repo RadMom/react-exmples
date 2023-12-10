@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import classes from "./ShippingAddressForm.module.css";
 
-function ShippingAddressForm({ onShippingAddressSubmit }) {
+function ShippingAddressForm({ next }) {
     const [shippingAddress, setShippingAddress] = useState({
         address: "",
         city: "",
@@ -17,7 +17,7 @@ function ShippingAddressForm({ onShippingAddressSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onShippingAddressSubmit(shippingAddress);
+        next(shippingAddress);
     };
 
     return (
@@ -31,6 +31,7 @@ function ShippingAddressForm({ onShippingAddressSubmit }) {
                         name="address"
                         value={shippingAddress.address}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div>
@@ -40,6 +41,7 @@ function ShippingAddressForm({ onShippingAddressSubmit }) {
                         name="city"
                         value={shippingAddress.city}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div>
@@ -49,6 +51,7 @@ function ShippingAddressForm({ onShippingAddressSubmit }) {
                         name="postalCode"
                         value={shippingAddress.postalCode}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <div>
@@ -58,6 +61,7 @@ function ShippingAddressForm({ onShippingAddressSubmit }) {
                         name="country"
                         value={shippingAddress.country}
                         onChange={handleChange}
+                        required
                     />
                 </div>
                 <button type="submit">Submit Shipping Address</button>

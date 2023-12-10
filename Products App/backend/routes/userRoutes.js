@@ -9,7 +9,7 @@ const {
     loginUser,
     registerUser,
     updateUserProfile,
-    getUserOrders,
+
     getAllUsers,
     deleteUser,
 } = require("../controllers/userController");
@@ -17,9 +17,10 @@ const {
 //routes
 userRoutes.post("/login", loginUser);
 userRoutes.post("/registration", registerUser);
+
 //protectedRoutes
-userRoutes.get("/:id", protectRoute, getUserOrders);
 userRoutes.put("/profile/:id", protectRoute, updateUserProfile);
+
 //admin only routes
 userRoutes.get("/", protectRoute, admin, getAllUsers);
 userRoutes.delete("/:id", protectRoute, admin, deleteUser);

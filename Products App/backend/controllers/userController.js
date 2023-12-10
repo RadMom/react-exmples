@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Order = require("../models/Order");
 const jwt = require("jsonwebtoken");
+const { validateObjectId } = require("../middleware/validateObjectId");
 
 // JWT then uses the sign() method to create a JSON Web Token for that user
 //  and returns the token in the form of a JSON string.
@@ -23,7 +24,7 @@ const loginUser = async (req, res) => {
             _id: user._id,
             username: user.username,
             email: user.email,
-            idAdmin: user.isAdmin,
+            isAdmin: user.isAdmin,
             token,
         });
     } catch (error) {
@@ -42,7 +43,7 @@ const registerUser = async (req, res) => {
             _id: user._id,
             username: user.username,
             email: user.email,
-            idAdmin: user.isAdmin,
+            isAdmin: user.isAdmin,
             token,
         });
     } catch (error) {
@@ -66,17 +67,6 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-//getUserOrders controller
-const getUserOrders = async (req, res) => {
-    const orders = await Order.find({ user: req.params.id });
-    if (orders) {
-        res.json(orders);
-    } else {
-        res.status(404);
-        throw new Error("No Orders found for this User");
-    }
-};
-
 //getAllUsers controller
 
 // Route for fetching users
@@ -88,11 +78,16 @@ const getAllUsers = async (req, res) => {
 
         // Handle different search criteria
         if (searchBy === "id" && search.length > 0) {
-            const user = await User.findById(search);
-            if (user) {
-                return res.status(200).json({ users: [user], totalPages: 1, currentPage: 1 });
+            if (validateObjectId(search)) {
+                const user = await User.findById(search);
+                if (user) {
+                    return res.status(200).json({ users: [user], totalPages: 1, currentPage: 1 });
+                } else {
+                    return res.status(404).json({ message: "User not found." });
+                }
             } else {
-                return res.status(404).json({ message: "User not found." });
+                res.status(404);
+                throw new Error("Invalid userId");
             }
         } else if (searchBy === "name" && search.length > 0) {
             query.username = { $regex: new RegExp(search, "i") };
@@ -135,7 +130,6 @@ module.exports = {
     loginUser,
     registerUser,
     updateUserProfile,
-    getUserOrders,
     getAllUsers,
     deleteUser,
 };

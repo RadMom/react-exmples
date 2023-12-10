@@ -5,7 +5,6 @@
 
 .products-details {
     flex: 1;
-    margin-right: 20px;
 }
 .product-table {
     width: 100%;
@@ -28,6 +27,8 @@
 }
 
 .total-price {
+    text-align: end;
+    margin-right: 10px;
     font-weight: bold;
     font-size: 16px;
 }

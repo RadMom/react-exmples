@@ -1,0 +1,108 @@
+.main-header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 7px;
+    background-color: var(--clr-neutral-700);
+}
+
+.main-header h1 {
+    margin-bottom: 7px;
+}
+
+.nav-menu-icon {
+    display: none;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-container ul {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.nav-container ul li {
+    margin-left: 17px;
+}
+
+.nav-container ul li a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: black;
+    padding: 7px;
+}
+
+.nav-container ul li a.active {
+    background-color: red;
+}
+
+.login-and-registration {
+    position: absolute;
+    right: 0;
+}
+
+.user-info {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.nav-user-icon {
+    display: block;
+    height: 2rem;
+    width: 3rem;
+    cursor: pointer;
+    align-self: center;
+    margin-bottom: 7px;
+}
+
+.user-email {
+    align-self: center;
+}
+
+.cart {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-menu-icon {
+        display: block;
+        height: 2rem;
+        width: 3rem;
+        cursor: pointer;
+        align-self: center;
+        margin-bottom: 7px;
+    }
+
+    .mobile {
+        flex-grow: 1;
+    }
+    .main-menu {
+        display: none;
+    }
+
+    .show-mobile-main-menu {
+        display: block;
+    }
+
+    .mobile {
+        width: 100%;
+    }
+    .show-mobile-main-menu ul {
+        flex-direction: column;
+    }
+
+    .show-mobile-main-menu ul li {
+        margin-left: 0;
+    }
+    .show-mobile-main-menu ul li a {
+        display: block;
+    }
+}

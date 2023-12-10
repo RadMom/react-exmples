@@ -1,4 +1,4 @@
-.header {
+/* .header {
     display: flex;
     flex-direction: column;
     border: 1px solid red;
@@ -31,6 +31,7 @@ li {
     list-style: none;
 }
 li a {
+    display: block;
     text-decoration: none;
     margin-left: 15px;
     padding: 5px;
@@ -65,3 +66,43 @@ svg {
 .cart {
     text-decoration: none;
 }
+
+.mobile-menu-icon {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .info {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    .nav {
+        display: none;
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .nav ul {
+        flex-direction: column;
+    }
+
+    .nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .nav a {
+        color: #fff;
+    }
+
+    .showMobileMenu .nav {
+        display: block;
+    }
+
+    .mobile-menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+} */

@@ -12,7 +12,7 @@ const ProductDetailsPage = () => {
     console.log(productId);
 
     useEffect(() => {
-        dispatch(getSingleProduct(productId));
+        dispatch(getSingleProduct(productId.productId));
     }, []);
 
     return (

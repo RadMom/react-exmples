@@ -11,10 +11,7 @@ const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
     console.log(cart);
-    //Must finish order action
-    const orderHandler = () => {
-        dispatch(createOrder(cart.products));
-    };
+
     return (
         <div>
             {cart.products.length > 0 ? (
@@ -30,8 +27,7 @@ const Cart = () => {
                         <p>Total Price: {cart.totalPrice}</p>
                     </div>
                     <div>
-                        <NavLink to="/order">Order</NavLink>
-                        <button onClick={orderHandler}>Buy</button>
+                        <NavLink to="/order">Next</NavLink>
                     </div>
                 </div>
             ) : (

@@ -70,7 +70,7 @@ const getProduct = async (req, res, next) => {
 
 //CREATE PRODUCT ,method:POST
 //URL: /products
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
     const { name, image, category, description, price, stock, productIsNew } = req.body;
 
     try {
@@ -91,11 +91,13 @@ const createProduct = async (req, res) => {
                 res.json(products);
             }
         } else {
-            res.status(404);
-            throw new Error("Product could not be uploaded.");
+            const error = new Error("Product could not be uploaded.");
+            error.status = 404;
+            throw error;
         }
     } catch (error) {
-        res.json(error.message);
+        console.log("PRODUCTCONTROLLER ERR : " + error);
+        next(error);
     }
 };
 

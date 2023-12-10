@@ -26,7 +26,7 @@ const paginationAndFiltersSlice = createSlice({
             console.log(action.payload);
         },
         setProductsFilters(state, action) {
-            state.filters.products = action.payload;
+            state.filters.products = { ...action.payload, search: "" };
             console.log(action.payload);
         },
         resetProductsFilters(state) {
